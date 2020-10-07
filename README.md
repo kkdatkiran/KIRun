@@ -1,5 +1,4 @@
-# KIRun
-Kinetic Instruction Runtime
+![Logo](/visuals/cover preview.png)
 
 ## What is KIRun?
 
