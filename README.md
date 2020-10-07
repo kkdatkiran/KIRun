@@ -1,4 +1,4 @@
-![Logo](/visuals/cover preview.png)
+![Logo](https://github.com/kkdatkiran/KIRun/blob/main/visuals/cover%20preview.png?raw=true)
 
 ## What is KIRun?
 
