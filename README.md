@@ -3,8 +3,11 @@
 ## What is KIRun?
 
 Is it a DSL?
+
 Is it a state machine api?
+
 Is it an interpreter?
+
 Is it a programming instruction set?
 
 I would say my objective in building this is runtime is to say YES!!! to all of the above questions.

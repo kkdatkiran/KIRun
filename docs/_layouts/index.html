@@ -1,0 +1,28 @@
+<html>
+  {% include head.html %}
+  <body>
+    <div class="slide darkBackground firstscreen">
+      <div class="title">
+        <span class="headings">KIRun</span>
+        <span class="subTitle">KINETIC INSTRUCTION RUNTIME</span>
+      </div>
+      <div class="logoContainer"><img src="assets/img/logo.png" /></div>
+      <div
+        class="mouse_scroll"
+        onclick="document.getElementById('nav').scrollIntoView()"
+      >
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+        <div>
+          <span class="m_scroll_arrows unu"></span>
+          <span class="m_scroll_arrows doi"></span>
+          <span class="m_scroll_arrows trei"></span>
+        </div>
+      </div>
+    </div>
+    {% include navbar.html %}
+    <div id="content" class="slide content">{{ content }}</div>
+    {% include footer.html %}
+  </body>
+</html>
