@@ -21,8 +21,8 @@
 title: KIRun - Kinetic Instruction Runtime
 email: kiran.grandhi@gmail.com
 description: KIRun is a easy to use logic designer without complexity of state machines and finite automata. While feeding in the domain objects make it best fit for the non programmers.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/KIRun" # the subpath of your site, e.g. /blog
+url: "https://kkdatkiran.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
 github_username: kkdatkiran
 
