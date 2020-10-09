@@ -2,7 +2,22 @@
   {% include head.html %}
   <body class="paddedBody">
     <div class="navContainer">{% include navbar.html %}</div>
-    <div class="navPosts">
+    <div
+      class="navPostsIcon"
+      id="navPostsIcon"
+      onclick="document.getElementById('navPosts').style.display='block';document.getElementById('navPostsIcon').style.display='none';"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div
+      id="navPosts"
+      class="navPosts"
+      onclick="if (screen.width > 750) return; document.getElementById('navPosts').style.display='none';document.getElementById('navPostsIcon').style.display='block';"
+    >
       <ul>
         {% for item in site.data.pages.toc %} {% if item.mark == page.mark %}
         <li class="selected">{% else %}</li>
@@ -73,7 +88,9 @@
               </div>
             </div>
             <div class="field">
-              <label for="replyto">Email<span class="mandatory">*</span></label>
+              <label for="_replyto"
+                >Email<span class="mandatory">*</span></label
+              >
               <input type="email" id="_replyto" name="_replyto" />
               <div id="_replytoError" class="errorMessage">
                 Please enter a valid email address

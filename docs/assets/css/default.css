@@ -51,7 +51,8 @@ html {
   padding-right: 20vw;
   padding-top: 2vh;
   min-height: calc(100vh - 330px);
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .content > h1 {
@@ -79,6 +80,7 @@ html {
 .subTitle {
   font-size: 3vh;
   color: #0d6e84;
+  text-align: center;
 }
 
 .footerTitle {
@@ -86,14 +88,19 @@ html {
   color: 0d6e84;
   padding-top: 20px;
   padding-left: 30px;
+  padding-bottom: 20px;
 }
 
 .logoContainer {
   padding-bottom: 3vh;
 }
 
+.logoContainer img {
+  width: 40vmin;
+}
+
 .footerContainer {
-  height: 250px;
+  min-height: 250px;
   background-color: #064a5a;
   padding-left: 20vw;
   padding-right: 20vw;
@@ -166,11 +173,12 @@ nav .subTitle a:hover,
 nav .subTitle a:visited {
   text-decoration: none;
   color: #0d6e84;
+  font-size: 30px;
 }
 
-nav .menu a,
-nav .menu a:hover,
-nav .menu a:visited {
+nav a,
+nav a:hover,
+nav a:visited {
   text-decoration: none;
   color: #064a5a80;
   font-size: 16px;
@@ -181,7 +189,8 @@ nav .menu a:hover {
   color: #064a5a;
 }
 
-nav .menu {
+nav .menu,
+nav .mobilemenu {
   flex: 1;
   display: flex;
   justify-content: flex-end;
@@ -191,6 +200,7 @@ nav .menu {
   position: fixed;
   left: 0px;
   top: 0px;
+  z-index: 1;
 }
 
 .paddedBody {
@@ -257,11 +267,11 @@ p > a:hover {
 }
 
 .contact {
-  position: absolute;
-  bottom: 0px;
-  width: 60vw;
-  border-top: 1px solid #a4d0d8;
   padding: 1vh;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 
 .form {
@@ -397,7 +407,7 @@ button:hover {
   margin: 0 auto;
   width: 24px;
   height: 100px;
-  margin-top: 125px;
+  margin-top: 10vmin;
   cursor: pointer;
 }
 
@@ -599,5 +609,109 @@ button:hover {
   }
   100% {
     opacity: 1;
+  }
+}
+
+/* mobile first */
+
+nav .mobilemenu {
+  display: none;
+}
+
+nav .close {
+  display: none;
+}
+
+.menuIcon {
+  display: inline-block;
+}
+
+.menuIcon span {
+  display: block;
+  border: 2px solid #0d6e84;
+  height: 4px;
+  margin: 4px;
+  width: 24px;
+  border-radius: 1px;
+}
+
+.navPostsIcon {
+  display: none;
+}
+
+@media only screen and (max-width: 750px) {
+  nav .menu {
+    display: none;
+    position: fixed;
+    background-color: #edf0f1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+    padding: 2vh;
+    flex-direction: column;
+  }
+
+  nav .close {
+    display: block;
+    position: fixed;
+    top: 4vh;
+    right: 4vw;
+  }
+
+  nav .menu a {
+    margin-bottom: 2vh;
+  }
+
+  nav .mobilemenu {
+    display: block;
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .content,
+  .footerContainer,
+  nav {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .navPosts {
+    display: none;
+    z-index: 2;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    left: 0;
+    top: 0;
+  }
+
+  .navPostsIcon {
+    display: block;
+    position: fixed;
+    border-radius: 2px;
+    width: 24px;
+    height: 26px;
+    left: 0;
+    top: 80px;
+    opacity: 0.4;
+    padding: 5px;
+  }
+
+  .navPostsIcon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #064a5a;
+    margin-bottom: 2px;
+    cursor: pointer;
+  }
+
+  .navPostsIcon span:nth-child(2),
+  .navPostsIcon span:nth-child(3),
+  .navPostsIcon span:nth-child(5) {
+    margin-left: 3px;
   }
 }
