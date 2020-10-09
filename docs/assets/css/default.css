@@ -269,7 +269,6 @@ p > a:hover {
 .contact {
   padding: 1vh;
   flex: 1;
-  display: flex;
   justify-content: flex-end;
   flex-direction: column;
 }
@@ -651,6 +650,7 @@ nav .close {
     z-index: 3;
     padding: 2vh;
     flex-direction: column;
+    justify-content: flex-start;
   }
 
   nav .close {
