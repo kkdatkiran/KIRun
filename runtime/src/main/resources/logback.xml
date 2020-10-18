@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property resource="application.properties" />
+	<appender name="CONSOLE"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss} %X{userName} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder>
+	</appender>
+	<timestamp key="archiveTimestamp" datePattern="yyyy-MM-dd'_'HH-mm-ss.SSS"/>
+	<appender name="SIFT"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${loglocation}/kirun.log</file>
+
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss} %X{userName} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${loglocation}/archive/kirun.${archiveTimestamp}.%i.log.zip
+			</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>${logmaxfiles}</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>25MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	<appender name="SIFT2"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${loglocation}/kirun_error.log</file>
+
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss} %X{userName} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>${loglocation}/archive/kirun_error.${archiveTimestamp}.%i.log.zip
+			</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>${logmaxfiles}</MaxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>25MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<logger name="io.kirun">
+		<level value="${loglevelkirun}"/>
+	</logger>
+	
+	<logger name="io.kirun.runtime.configuration.RuntimeExceptionHandler">
+		<level value="error"/>		
+		<appender-ref ref="SIFT2" />
+	</logger>
+	
+	<logger name="io.kirun.runtime.security.RuntimeAuthenticationFailureHandler">
+		<level value="error"/>		
+		<appender-ref ref="SIFT2" />
+	</logger>
+	
+	<root level="${loglevelroot}">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="SIFT" />
+	</root>
+
+</configuration>
