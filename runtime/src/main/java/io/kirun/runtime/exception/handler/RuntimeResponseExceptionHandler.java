@@ -1,4 +1,4 @@
-package io.kirun.runtime.configuration;
+package io.kirun.runtime.exception.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +15,9 @@ import io.kirun.runtime.web.RuntimeResponse;
 import io.kirun.runtime.web.RuntimeResponse.ResponseType;
 
 @ControllerAdvice
-public class RuntimeExceptionHandler extends ResponseEntityExceptionHandler {
+public class RuntimeResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
-	private static final Logger localLogger = LoggerFactory.getLogger(RuntimeExceptionHandler.class);
+	private static final Logger localLogger = LoggerFactory.getLogger(RuntimeResponseExceptionHandler.class);
 
 	@ExceptionHandler({ Exception.class })
 	@ResponseBody

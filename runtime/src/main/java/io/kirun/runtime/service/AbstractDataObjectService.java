@@ -50,7 +50,7 @@ public class AbstractDataObjectService<R extends MongoRepository<D, String>, D e
 		dataObject.setCreatedAt(now);
 		dataObject.setUpdatedAt(now);
 
-		String userId = SecurityContextUtil.loggedInUserId();
+		String userId = SecurityContextUtil.loggedInUsername();
 		dataObject.setCreatedBy(userId);
 		dataObject.setUpdatedBy(userId);
 
@@ -95,7 +95,7 @@ public class AbstractDataObjectService<R extends MongoRepository<D, String>, D e
 		dataObject.setCreatedAt(dataObject.getCreatedAt());
 		dataObject.setCreatedBy(dataObject.getCreatedBy());
 		dataObject.setUpdatedAt(Date.from(Instant.now()));
-		String currentUser = SecurityContextUtil.loggedInUserId();
+		String currentUser = SecurityContextUtil.loggedInUsername();
 		dataObject.setUpdatedBy(currentUser == null ? "anonymous" : currentUser);
 
 		return repository.save(dataObject);

@@ -9,7 +9,7 @@ import io.kirun.runtime.security.model.User;
 public class SecurityContextUtil {
 
 	@Nullable
-	public static String loggedInUserId() {
+	public static String loggedInUsername() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null)
@@ -18,7 +18,7 @@ public class SecurityContextUtil {
 		if (!authentication.isAuthenticated() || !(authentication.getPrincipal() instanceof User))
 			return null;
 
-		return ((User) authentication.getPrincipal()).getUserId();
+		return ((User) authentication.getPrincipal()).getUsername();
 	}
 
 	public static boolean isSuperAdmin() {

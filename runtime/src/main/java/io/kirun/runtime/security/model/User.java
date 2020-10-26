@@ -26,20 +26,26 @@ public class User extends AbstractDataObject implements UserDetails {
 
 	private static final long serialVersionUID = -7122595771207045999L;
 
-	@Id
-	private String userId;
 	private String firstName;
 	private String lastName;
+
+	@Id
 	private String email;
-	
-	@JsonProperty(access = Access.WRITE_ONLY)	
+
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String activationString;
 	
+	@JsonIgnore
+	private String resetPasswordString;
+
 	private boolean enabled = true;
 	private List<String> permissions;
 
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
+	
+	@JsonIgnore
+	private Integer wrongPasswordTries = 0;
 
 	@JsonIgnore
 	@Override
@@ -53,7 +59,7 @@ public class User extends AbstractDataObject implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return this.userId;
+		return this.email;
 	}
 
 	@Override
@@ -73,6 +79,6 @@ public class User extends AbstractDataObject implements UserDetails {
 
 	@JsonIgnore
 	public String getId() {
-		return this.userId;
+		return this.email;
 	}
 }

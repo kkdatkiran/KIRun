@@ -36,7 +36,7 @@ public class AuthenticationService {
 			throw new AuthException("User '"+authRequest.getUserId()+"' not found.");
 
 		Date expiresAt = Date.from(Instant.now().plus(expiration, ChronoUnit.MINUTES));
-		String token = JWTUtil.generateToken(user.getUserId(), secret, expiresAt);
+		String token = JWTUtil.generateToken(user.getUsername(), secret, expiresAt);
 
 		return new Authentication().setExpiresAt(expiresAt).setToken(token).setUser(user);
 	}
@@ -54,7 +54,7 @@ public class AuthenticationService {
 		User user = userService.findByUserId(userId);
 
 		Date expiresAt = Date.from(Instant.now().plus(expiration, ChronoUnit.MINUTES));
-		String token = JWTUtil.generateToken(user.getUserId(), secret, expiresAt);
+		String token = JWTUtil.generateToken(user.getUsername(), secret, expiresAt);
 
 		return new Authentication().setExpiresAt(expiresAt).setToken(token).setUser(user);
 	}

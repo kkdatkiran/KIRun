@@ -63,11 +63,16 @@
 		<appender-ref ref="SIFT2" />
 	</logger>
 	
-	<logger name="io.kirun.runtime.security.RuntimeAuthenticationFailureHandler">
+	<logger name="io.kirun.runtime.exception.handler.RuntimeResponseExceptionHandler">
 		<level value="error"/>		
 		<appender-ref ref="SIFT2" />
 	</logger>
 	
+	<logger name="io.kirun.runtime.exception.handler.RuntimeAsyncExceptionHandler">
+		<level value="error"/>		
+		<appender-ref ref="SIFT2" />
+	</logger>
+		
 	<root level="${loglevelroot}">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="SIFT" />

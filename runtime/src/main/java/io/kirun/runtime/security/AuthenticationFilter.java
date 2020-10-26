@@ -16,6 +16,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import io.kirun.runtime.security.web.SecurityController;
 import io.kirun.runtime.security.web.UserController;
+import io.kirun.runtime.web.CaptchaController;
+import io.kirun.runtime.web.RegistrationController;
 
 public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -24,7 +26,11 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
 	private static final List<String> EXCLUDED_URLS = List.of(
 			SecurityController.MAPPING + SecurityController.AUTHENTICATE,
 			SecurityController.MAPPING + SecurityController.REFRESH_AUTHENTICATION,
-			UserController.MAPPING + UserController.ACTIVATE_USER, "/error");
+			UserController.MAPPING + UserController.RESEND_ACTIVATION_MAIL,
+			UserController.MAPPING + UserController.ACTIVATE_USER,
+			UserController.MAPPING + UserController.RESET_PASSWORD_MAIL,
+			UserController.MAPPING + UserController.RESET_PASSWORD, RegistrationController.MAPPING,
+			CaptchaController.MAPPING, "/error");
 
 	public AuthenticationFilter() {
 		super("/**");

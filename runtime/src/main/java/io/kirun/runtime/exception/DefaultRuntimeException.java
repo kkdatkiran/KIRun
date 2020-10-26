@@ -67,7 +67,7 @@ public class DefaultRuntimeException extends RuntimeException {
 	public DefaultRuntimeException(HttpStatus status, String message, String debugMessage, Throwable exception) {
 
 		super(message, exception);
-		this.userId = SecurityContextUtil.loggedInUserId();
+		this.userId = SecurityContextUtil.loggedInUsername();
 		this.errorCode = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime()) + "-"
 				+ Long.toHexString(System.currentTimeMillis() % (1000 * 60 * 60 * 24l));
 		this.status = status;

@@ -44,7 +44,12 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
 		User user = null;
 		if (token.getAuthentication().startsWith("Bearer")) {
 
-			user = userService.findByUserId(JWTUtil.parseToken(token.getAuthentication().substring(7).strip(), secret));
+			try {
+				user = userService
+						.findByUserId(JWTUtil.parseToken(token.getAuthentication().substring(7).strip(), secret));
+			} catch (Exception ex) {
+				throw AuthException.UNKNOWN_AUTH;
+			}
 		} else if (token.getAuthentication().startsWith("Basic")) {
 
 			String auth = new String(Base64.getDecoder().decode(token.getAuthentication().substring(5).strip()));
@@ -61,7 +66,7 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
 		if (user == null)
 			throw AuthException.UNKNOWN_AUTH;
 
-		localLogger.debug("Found user : {}", user.getUserId());
+		localLogger.debug("Found user : {}", user.getUsername());
 		return user;
 	}
 }
