@@ -1,3 +1,3 @@
-![Logo](https://github.com/kkdatkiran/KIRun/blob/main/visuals/cover%20preview.png?raw=true)
+![Logo](https://github.com/kkdatkiran/KIRun/blob/main/visuals/coverpreiew2.png?raw=true)
 
-[visit](https://kkdatkiran.github.io/KIRun/)
+[visit the site](https://kirun.io/)

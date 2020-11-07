@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
-function Title(props) {
-  return <h1> Hello1 </h1>;
-}
+import App from "./App";
 
 const wrapper = document.getElementById("appdiv");
-wrapper ? ReactDOM.render(<Title />, wrapper) : false;
+wrapper ? ReactDOM.render(<App />, wrapper) : false;
