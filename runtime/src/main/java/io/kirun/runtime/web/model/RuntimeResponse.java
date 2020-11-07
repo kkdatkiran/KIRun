@@ -1,4 +1,4 @@
-package io.kirun.runtime.web;
+package io.kirun.runtime.web.model;
 
 import java.io.Serializable;
 

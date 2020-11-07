@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.kirun.runtime.exception.DefaultRuntimeException;
-import io.kirun.runtime.web.RuntimeResponse;
-import io.kirun.runtime.web.RuntimeResponse.ResponseType;
+import io.kirun.runtime.web.model.RuntimeResponse;
+import io.kirun.runtime.web.model.RuntimeResponse.ResponseType;
 
 @Component
 public class RuntimeAuthenticationFailureHandler implements AuthenticationFailureHandler {

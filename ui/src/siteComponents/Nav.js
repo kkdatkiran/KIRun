@@ -36,7 +36,7 @@ export default function Navigate(props) {
         </div>
         <div className="contactUs">
           <NavLink to="/contactUS" activeClassName="activeLink">
-            CONTACT US
+            CONTACT
           </NavLink>
         </div>
       </nav>

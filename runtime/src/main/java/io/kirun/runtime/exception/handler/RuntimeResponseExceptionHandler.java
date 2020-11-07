@@ -11,8 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import io.kirun.runtime.exception.DefaultRuntimeException;
 import io.kirun.runtime.security.AuthException;
-import io.kirun.runtime.web.RuntimeResponse;
-import io.kirun.runtime.web.RuntimeResponse.ResponseType;
+import io.kirun.runtime.web.model.RuntimeResponse;
+import io.kirun.runtime.web.model.RuntimeResponse.ResponseType;
 
 @ControllerAdvice
 public class RuntimeResponseExceptionHandler extends ResponseEntityExceptionHandler {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.kirun.runtime.security.model.User;
 import io.kirun.runtime.security.service.UserService;
 import io.kirun.runtime.service.captcha.CaptchaService;
+import io.kirun.runtime.web.model.RuntimeResponse;
 
 @RestController
 @RequestMapping

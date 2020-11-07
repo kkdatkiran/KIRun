@@ -16,8 +16,8 @@ import io.kirun.runtime.security.model.User;
 import io.kirun.runtime.security.service.UserService;
 import io.kirun.runtime.service.captcha.CaptchaService;
 import io.kirun.runtime.web.AbstractDataObjectController;
-import io.kirun.runtime.web.RuntimeResponse;
 import io.kirun.runtime.web.model.PasswordChangeRequest;
+import io.kirun.runtime.web.model.RuntimeResponse;
 
 @RestController
 @RequestMapping(UserController.MAPPING)

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.kirun.runtime.security.model.Authentication;
 import io.kirun.runtime.security.model.AuthenticationRequest;
 import io.kirun.runtime.security.service.AuthenticationService;
-import io.kirun.runtime.web.RuntimeResponse;
+import io.kirun.runtime.web.model.RuntimeResponse;
 
 @RestController
 @RequestMapping(SecurityController.MAPPING)

@@ -17,6 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import io.kirun.runtime.security.web.SecurityController;
 import io.kirun.runtime.security.web.UserController;
 import io.kirun.runtime.web.CaptchaController;
+import io.kirun.runtime.web.ContactUsController;
 import io.kirun.runtime.web.RegistrationController;
 
 public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
@@ -30,7 +31,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
 			UserController.MAPPING + UserController.ACTIVATE_USER,
 			UserController.MAPPING + UserController.RESET_PASSWORD_MAIL,
 			UserController.MAPPING + UserController.RESET_PASSWORD, RegistrationController.MAPPING,
-			CaptchaController.MAPPING, "/error");
+			ContactUsController.MAPPING, CaptchaController.MAPPING, "/error");
 
 	public AuthenticationFilter() {
 		super("/**");

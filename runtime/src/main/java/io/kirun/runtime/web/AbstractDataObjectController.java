@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.kirun.runtime.exception.NotFoundException;
 import io.kirun.runtime.model.AbstractDataObject;
 import io.kirun.runtime.service.AbstractDataObjectService;
+import io.kirun.runtime.web.model.RuntimeResponse;
 
 public class AbstractDataObjectController<D extends AbstractDataObject, R extends MongoRepository<D, String>, S extends AbstractDataObjectService<R, D>> {
 

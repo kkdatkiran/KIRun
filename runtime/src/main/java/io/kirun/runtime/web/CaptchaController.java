@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.kirun.runtime.service.captcha.Captcha;
 import io.kirun.runtime.service.captcha.CaptchaService;
+import io.kirun.runtime.web.model.RuntimeResponse;
 
 @RequestMapping(CaptchaController.MAPPING)
 @RestController
