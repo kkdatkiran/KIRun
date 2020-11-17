@@ -1,6 +1,83 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import {
+  useContactContextState,
+  useContactContextDispatch,
+  ADD_CAPTCHA_INFO,
+  NAME_CHANGE,
+  EMAIL_CHANGE,
+  MESSAGE_CHANGE,
+  CAPTCHA_CHANGE,
+  VALIDATE_FORM,
+  CLEAR_FORM,
+} from "../contexts/ContactContext";
+
+import { useMessageContextDispatch } from "../contexts/MessageContext";
+
+import { getCaptcha } from "./../services/captchaService";
+import { sendContactUs } from "./../services/contactService";
+import { handleMessage } from "./../services/messageService";
+
+async function send(messageDispatch, dispatch, contactUs) {
+  const {
+    contactUs: { name, email, message },
+    captcha,
+  } = contactUs;
+
+  if (!name || !email || !message || !captcha) {
+    dispatch({ type: VALIDATE_FORM });
+    return;
+  }
+  try {
+    const response = await sendContactUs(contactUs);
+    handleMessage(messageDispatch, response);
+    dispatch({ type: CLEAR_FORM });
+    getData(dispatch);
+  } catch (err) {
+    const { response } = err;
+    handleMessage(messageDispatch, response);
+  }
+}
+
+async function getData(dispatch) {
+  let { data: { data } = {} } = await getCaptcha();
+  dispatch({ type: ADD_CAPTCHA_INFO, payload: data });
+}
+
+function refreshCapthca(dispatch) {
+  getData(dispatch);
+}
 
 export default function ContactUs() {
+  const dispatch = useContactContextDispatch();
+  const messageDispatch = useMessageContextDispatch();
+  const {
+    captchaImageURL,
+    name = "",
+    nameError,
+    email = "",
+    emailError,
+    message = "",
+    messageError,
+    captcha = "",
+    captchaError,
+    captchaString,
+  } = useContactContextState();
+
+  useEffect(() => {
+    getData(dispatch);
+  }, []);
+
+  let nameErrorMsg, emailErrorMsg, messageErrorMsg, captchaErrorMsg;
+  if (nameError)
+    nameErrorMsg = <div className="errorMessage"> {nameError} </div>;
+  if (emailError)
+    emailErrorMsg = <div className="errorMessage"> {emailError} </div>;
+  if (messageError)
+    messageErrorMsg = <div className="errorMessage"> {messageError} </div>;
+  if (captchaError)
+    captchaErrorMsg = <div className="errorMessage"> {captchaError} </div>;
+
   return (
     <>
       <h1>CONTACT</h1>
@@ -18,20 +95,27 @@ export default function ContactUs() {
             id="name"
             name="name"
             spellCheck="false"
-            data-ms-editor="true"
+            value={name}
+            onChange={(e) =>
+              dispatch({ type: NAME_CHANGE, payload: e.target.value })
+            }
           />
-          <div id="nameError" className="errorMessage">
-            Please enter a valid name
-          </div>
+          {nameErrorMsg}
         </div>
         <div className="field">
           <label htmlFor="_replyto">
             Email<span className="mandatory">*</span>
           </label>
-          <input type="email" id="_replyto" name="_replyto" />
-          <div id="_replytoError" className="errorMessage">
-            Please enter a valid email address
-          </div>
+          <input
+            type="email"
+            id="_replyto"
+            name="_replyto"
+            value={email}
+            onChange={(e) =>
+              dispatch({ type: EMAIL_CHANGE, payload: e.target.value })
+            }
+          />
+          {emailErrorMsg}
         </div>
         <div className="field">
           <label htmlFor="message">
@@ -42,14 +126,46 @@ export default function ContactUs() {
             name="message"
             rows="6"
             spellCheck="false"
-            data-ms-editor="true"
+            value={message}
+            onChange={(e) =>
+              dispatch({ type: MESSAGE_CHANGE, payload: e.target.value })
+            }
           ></textarea>
-          <div id="messageError" className="errorMessage">
-            Please enter a valid message
+          {messageErrorMsg}
+        </div>
+        <div className="field">
+          <label htmlFor="captcha">
+            Captcha<span className="mandatory">*</span>
+          </label>
+          <div className="alignTop">
+            <img src={captchaImageURL} alt="Captcha" className="captchImage" />
+            <button href="#" onClick={(_) => refreshCapthca(dispatch)}>
+              <img alt="refresh" src="/images/refresh.png" />
+            </button>
           </div>
+          <input
+            type="text"
+            id="captcha"
+            name="captcha"
+            value={captcha}
+            onChange={(e) =>
+              dispatch({ type: CAPTCHA_CHANGE, payload: e.target.value })
+            }
+          />
+          {captchaErrorMsg}
         </div>
         <div className="buttonfield">
-          <button className="send" type="submit">
+          <button
+            className="send"
+            type="submit"
+            onClick={() =>
+              send(messageDispatch, dispatch, {
+                contactUs: { name, email, message },
+                captcha,
+                captchaString,
+              })
+            }
+          >
             Send
           </button>
         </div>

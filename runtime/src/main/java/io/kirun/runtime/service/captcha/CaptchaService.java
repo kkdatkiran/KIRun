@@ -94,6 +94,26 @@ public class CaptchaService {
 		graphics.setColor(backgroundColor);
 		graphics.fillRect(0, 0, width, height);
 
+		Color boxesColor = backgroundColor.brighter();
+		int hLines = 10;
+		int vLines = 20;
+		if (width < height) {
+			hLines = 20;
+			vLines = 10;
+		}
+
+		graphics.setColor(boxesColor);
+		int dim = 0;
+		for (int i = 1; i < hLines; i++) {
+			dim = i * (height / hLines);
+			graphics.fillRect(0, dim, width, 3);
+		}
+
+		for (int i = 1; i < vLines; i++) {
+			dim = i * (width / vLines);
+			graphics.fillRect(dim, 0, 3, height);
+		}
+
 		Font f = new Font("Arial", Font.BOLD, 30);
 		graphics.setFont(f);
 		Rectangle2D rect = f.getStringBounds(generatedString, new FontRenderContext(null, true, false));
