@@ -98,7 +98,7 @@ public class MailService {
 
 			messagePart = new MimeBodyPart();
 			messagePart.setDataHandler(new DataHandler(new URLDataSource(
-					Thread.currentThread().getContextClassLoader().getResource("emailImages/logo.png"))));
+					Thread.currentThread().getContextClassLoader().getResource("emailImages/logoksmall.png"))));
 			messagePart.setHeader("Content-ID", "<logo>");
 			messagePart.setFileName("logo.png");
 			messagePart.setDisposition(Part.INLINE);
@@ -106,9 +106,9 @@ public class MailService {
 
 			messagePart = new MimeBodyPart();
 			messagePart.setDataHandler(new DataHandler(new URLDataSource(
-					Thread.currentThread().getContextClassLoader().getResource("emailImages/kirun.png"))));
-			messagePart.setHeader("Content-ID", "<kirun>");
-			messagePart.setFileName("kirun.png");
+					Thread.currentThread().getContextClassLoader().getResource("emailImages/top.png"))));
+			messagePart.setHeader("Content-ID", "<top>");
+			messagePart.setFileName("top.png");
 			messagePart.setDisposition(Part.INLINE);
 			multipart.addBodyPart(messagePart);
 

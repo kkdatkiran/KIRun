@@ -90,7 +90,7 @@ public class RuntimeConfiguration {
 		mailProps.put("mail.smtp.starttls.enable", "true");
 		mailProps.put("mail.smtp.auth", "true");
 		mailProps.put("mail.transport.protocol", "smtp");
-		mailProps.put("mail.debug", "true");
+		mailProps.put("mail.debug", "false");
 
 		mailer.setJavaMailProperties(mailProps);
 

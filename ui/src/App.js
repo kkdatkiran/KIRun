@@ -1,16 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Nav from "./siteComponents/Nav";
-import Home from "./siteComponents/Home";
-import About from "./siteComponents/About";
-import Docs from "./siteComponents/Docs";
-import ContactUs from "./siteComponents/ContactUs";
-import Demo from "./demoComponents/Demo";
-import LeftSide from "./siteComponents/LeftSide";
-import Logo from "./siteComponents/Logo";
+import Nav from "./components/site/Nav";
+import Home from "./components/site/Home";
+import About from "./components/site/About";
+import Docs from "./components/site/Docs";
+import ContactUs from "./components/site/ContactUs";
+import Demo from "./components/demo/Demo";
+import LeftSide from "./components/site/LeftSide";
+import Logo from "./components/site/Logo";
+import Message from "./components/site/Message";
+
 import { ContactContextProvider } from "./contexts/ContactContext";
-import Message from "./siteComponents/Message";
 
 export default function App() {
   return (

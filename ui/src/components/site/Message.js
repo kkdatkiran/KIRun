@@ -5,7 +5,7 @@ import {
   CLEAR_OLD_MESSAGES,
   useMessageContextState,
   useMessageContextDispatch,
-} from "./../contexts/MessageContext";
+} from "./../../contexts/MessageContext";
 
 export default function Message() {
   const messages = useMessageContextState();

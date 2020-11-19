@@ -10,15 +10,12 @@ import {
   CAPTCHA_CHANGE,
   VALIDATE_FORM,
   CLEAR_FORM,
-} from "../contexts/ContactContext";
+} from "../../contexts/ContactContext";
 
-import { useMessageContextDispatch } from "../contexts/MessageContext";
+import { getCaptcha } from "./../../services/captchaService";
+import { sendContactUs } from "./../../services/contactService";
 
-import { getCaptcha } from "./../services/captchaService";
-import { sendContactUs } from "./../services/contactService";
-import { handleMessage } from "./../services/messageService";
-
-async function send(messageDispatch, dispatch, contactUs) {
+async function send(dispatch, contactUs) {
   const {
     contactUs: { name, email, message },
     captcha,
@@ -28,15 +25,10 @@ async function send(messageDispatch, dispatch, contactUs) {
     dispatch({ type: VALIDATE_FORM });
     return;
   }
-  try {
-    const response = await sendContactUs(contactUs);
-    handleMessage(messageDispatch, response);
-    dispatch({ type: CLEAR_FORM });
-    getData(dispatch);
-  } catch (err) {
-    const { response } = err;
-    handleMessage(messageDispatch, response);
-  }
+
+  await sendContactUs(contactUs);
+  dispatch({ type: CLEAR_FORM });
+  getData(dispatch);
 }
 
 async function getData(dispatch) {
@@ -50,7 +42,6 @@ function refreshCapthca(dispatch) {
 
 export default function ContactUs() {
   const dispatch = useContactContextDispatch();
-  const messageDispatch = useMessageContextDispatch();
   const {
     captchaImageURL,
     name = "",
@@ -139,7 +130,7 @@ export default function ContactUs() {
           </label>
           <div className="alignTop">
             <img src={captchaImageURL} alt="Captcha" className="captchImage" />
-            <button href="#" onClick={(_) => refreshCapthca(dispatch)}>
+            <button href="#" onClick={() => refreshCapthca(dispatch)}>
               <img alt="refresh" src="/images/refresh.png" />
             </button>
           </div>
@@ -156,10 +147,10 @@ export default function ContactUs() {
         </div>
         <div className="buttonfield">
           <button
-            className="send"
+            className="submit"
             type="submit"
             onClick={() =>
-              send(messageDispatch, dispatch, {
+              send(dispatch, {
                 contactUs: { name, email, message },
                 captcha,
                 captchaString,

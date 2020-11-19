@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 const MessageStateContext = React.createContext();
 const MessageDispatchContext = React.createContext();
@@ -25,8 +26,31 @@ function messageReducer(state = defaultState, action) {
   }
 }
 
+let registered = undefined;
 function MessageContextProvider({ children }) {
   const [state, dispatch] = React.useReducer(messageReducer, defaultState);
+
+  function handler(response) {
+    const {
+      data: { type, message, error: { errorCode, message: errorMessage } = {} },
+    } = response;
+    const msg = errorCode ? errorMessage : message;
+    if (!msg) return response;
+    dispatch({
+      type: ADD_MESSAGE,
+      payload: { type, message: msg, errorCode },
+    });
+    return response;
+  }
+
+  if (!registered) {
+    axios.interceptors.response.use(handler, (err) => {
+      handler(err.response);
+      throw err;
+    });
+
+    registered = true;
+  }
 
   return (
     <MessageStateContext.Provider value={state}>

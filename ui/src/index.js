@@ -3,13 +3,16 @@ import ReactDOM from "react-dom";
 
 import App from "./App";
 
+import { LoginContextProvider } from "./contexts/LoginContext";
 import { MessageContextProvider } from "./contexts/MessageContext";
 
 const wrapper = document.getElementById("appdiv");
 wrapper
   ? ReactDOM.render(
       <MessageContextProvider>
-        <App />
+        <LoginContextProvider>
+          <App />
+        </LoginContextProvider>
       </MessageContextProvider>,
       wrapper
     )

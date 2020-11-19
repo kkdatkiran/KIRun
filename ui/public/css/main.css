@@ -254,6 +254,7 @@ nav.demoNav {
 }
 
 .form input[type="text"],
+.form input[type="password"],
 .form input[type="email"],
 .form textarea {
   border: none;
@@ -290,7 +291,7 @@ nav.demoNav {
   width: 30px;
 }
 
-button.send {
+button.submit {
   color: #fff;
   background-color: #a85b37;
   border-radius: 3px;
@@ -312,6 +313,9 @@ button.send {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   color: #fff;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
 
 .mandatory {
@@ -320,6 +324,7 @@ button.send {
 
 .captchImage {
   width: 200px;
+  height: 75px;
 }
 
 .messageContainer {
@@ -372,6 +377,107 @@ button.send {
 
 .INFORMATION {
   background-color: #3167bc;
+}
+
+.loginBack {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login {
+  width: 800px;
+  height: 700px;
+  background-color: #ffffff44;
+  box-shadow: 0px 0px 8px #00000022;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.login .loginLeft {
+  width: 350px;
+  background-color: #fff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.login .loginRight {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login .loginRight .form {
+  height: 230px;
+}
+
+.loginLogo {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.login .form {
+  height: 300px;
+  width: 250px;
+}
+
+.login .submit {
+  background-color: #d0a179;
+}
+
+.login .form input[type="text"],
+.login .form input[type="password"],
+.login .form input[type="email"],
+.login .form textarea {
+  outline-color: #d0a179;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #efefef inset !important;
+}
+
+.login .form label {
+  color: #d0a179;
+}
+
+.browser {
+}
+
+.links {
+  text-align: left;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.links button {
+  background: none;
+  border: none;
+  flex-grow: 0;
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 12px;
+  padding: 0;
+  cursor: pointer;
+  color: #d0a179;
+  outline-color: #d0a179;
+}
+
+.links .submit {
+  outline-color: #d0a179;
+}
+
+.links button:hover {
+  text-decoration: underline;
 }
 
 @media only screen and (max-width: 900px) {
