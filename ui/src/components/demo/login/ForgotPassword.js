@@ -11,7 +11,7 @@ import {
 } from "../../../contexts/LoginContext";
 import { getCaptcha } from "./../../../services/captchaService";
 import { forgotPassword as forgotPasswordServiceCall } from "../../../services/loginService";
-import { LOGIN_FORM, SIGN_UP_FORM } from "./Constants";
+import { LOGIN_FORM } from "./Constants";
 
 async function forgotPassword(dispatch, userName, captcha, captchaString) {
   if (!userName || !captcha) {
@@ -118,9 +118,6 @@ export default function ForgotPassword(props) {
       </div>
       <div className="links">
         <button onClick={() => props.onModeChange(LOGIN_FORM)}>login</button>
-        <button onClick={() => props.onModeChange(SIGN_UP_FORM)}>
-          sign up a new user
-        </button>
       </div>
     </div>
   );

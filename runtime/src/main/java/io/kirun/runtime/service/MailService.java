@@ -141,14 +141,14 @@ public class MailService {
 
 		((MailService) AopContext.currentProxy()).sendMail(new SendMailRequest().setTemplateName(USER_CREATED_MAIL)
 				.setParameters(new HashMap<>(Map.of("user", user, "urlPrefix", urlPrefix)))
-				.setSubject("Verify email address and activate user for KIRun").setTo(user.getEmail()));
+				.setSubject("Verify email address and activate user for KIRUN").setTo(user.getEmail()));
 	}
 
 	public void passwordReset(User user) {
 		
 		((MailService) AopContext.currentProxy()).sendMail(new SendMailRequest().setTemplateName(PASSWORD_RESET_MAIL)
 				.setParameters(new HashMap<>(Map.of("user", user, "urlPrefix", urlPrefix)))
-				.setSubject("Reset password for KIRun").setTo(user.getEmail()));
+				.setSubject("Reset password for KIRUN").setTo(user.getEmail()));
 	}
 
 }

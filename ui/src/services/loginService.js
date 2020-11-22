@@ -9,3 +9,17 @@ export async function forgotPassword(userId, captcha, captchaString) {
     params: { userId, captcha, captchaString },
   });
 }
+
+export async function forgotPasswordReset(resetBody) {
+  return axios.post("/api/security/user/resetPassword", resetBody);
+}
+
+export async function signUpUser(userBody) {
+  return axios.post("/api/registration", userBody);
+}
+
+export async function activateUser(email, activationCode) {
+  return axios.get("/api/security/user/activateUser", {
+    params: { userId: email, activationCode },
+  });
+}

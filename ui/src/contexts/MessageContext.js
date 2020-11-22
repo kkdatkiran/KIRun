@@ -31,10 +31,17 @@ function MessageContextProvider({ children }) {
   const [state, dispatch] = React.useReducer(messageReducer, defaultState);
 
   function handler(response) {
-    const {
+    let {
       data: { type, message, error: { errorCode, message: errorMessage } = {} },
+      status,
+      data,
+      statusText,
     } = response;
-    const msg = errorCode ? errorMessage : message;
+    let msg = errorCode ? errorMessage : message;
+    if (!msg && (status < 200 || status > 299)) {
+      type = "ERROR";
+      msg = data ? data : statusText;
+    }
     if (!msg) return response;
     dispatch({
       type: ADD_MESSAGE,

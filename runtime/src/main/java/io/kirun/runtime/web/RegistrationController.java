@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.kirun.runtime.security.model.User;
 import io.kirun.runtime.security.service.UserService;
 import io.kirun.runtime.service.captcha.CaptchaService;
+import io.kirun.runtime.web.model.RegistrationUser;
 import io.kirun.runtime.web.model.RuntimeResponse;
 
 @RestController
-@RequestMapping
+@RequestMapping(RegistrationController.MAPPING)
 public class RegistrationController {
 
 	public static final String MAPPING = "/api/registration";
@@ -32,11 +32,10 @@ public class RegistrationController {
 	private CaptchaService captchaService;
 
 	@PostMapping
-	public ResponseEntity<RuntimeResponse<Boolean>> register(@RequestBody @Valid User user,
-			@RequestParam String captcha, @RequestParam String captchaString) {
+	public ResponseEntity<RuntimeResponse<Boolean>> register(@RequestBody @Valid RegistrationUser regUser) {
 
-		captchaService.validate(captcha, captchaString);
-		return ResponseEntity.ok(new RuntimeResponse<Boolean>().setData(userService.register(user)));
+		captchaService.validate(regUser.getCaptcha(), regUser.getCaptchaString());
+		return ResponseEntity.ok(new RuntimeResponse<Boolean>().setData(userService.register(regUser.getUser())));
 	}
 
 	@GetMapping(EMAIL_ID_CHECK)

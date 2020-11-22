@@ -17,6 +17,7 @@ import io.kirun.runtime.security.service.UserService;
 import io.kirun.runtime.service.captcha.CaptchaService;
 import io.kirun.runtime.web.AbstractDataObjectController;
 import io.kirun.runtime.web.model.PasswordChangeRequest;
+import io.kirun.runtime.web.model.ResetPasswordRequest;
 import io.kirun.runtime.web.model.RuntimeResponse;
 
 @RestController
@@ -51,21 +52,18 @@ public class UserController extends AbstractDataObjectController<User, IUserRepo
 				.setData(this.service.sendResetPasswordMail(userId)));
 	}
 
-	@GetMapping(RESET_PASSWORD)
-	public ResponseEntity<RuntimeResponse<Boolean>> resetPassword(@RequestParam String userId,
-			@RequestParam String password, @RequestParam String resetPasswordString, @RequestParam String captcha,
-			@RequestParam String captchaString) {
+	@PostMapping(RESET_PASSWORD)
+	public ResponseEntity<RuntimeResponse<Boolean>> resetPassword(@RequestBody ResetPasswordRequest request) {
 
-		captchaService.validate(captcha, captchaString);
+		captchaService.validate(request.getCaptcha(), request.getCaptchaString());
 		return ResponseEntity.ok(new RuntimeResponse<Boolean>().setMessage("Password reset successfully")
-				.setData(this.service.resetPassword(userId, password, resetPasswordString)));
+				.setData(this.service.resetPassword(request.getUserId(), request.getPassword(), request.getResetPasswordString())));
 	}
 
 	@GetMapping(ACTIVATE_USER)
 	public ResponseEntity<RuntimeResponse<Boolean>> activateUser(@RequestParam String userId,
-			@RequestParam String activationCode, @RequestParam String captcha, @RequestParam String captchaString) {
+			@RequestParam String activationCode) {
 
-		captchaService.validate(captcha, captchaString);
 		return ResponseEntity.ok(new RuntimeResponse<Boolean>().setMessage("User activated")
 				.setData(this.service.activateUser(userId, activationCode)));
 	}

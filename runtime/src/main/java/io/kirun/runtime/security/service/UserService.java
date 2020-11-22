@@ -329,7 +329,9 @@ public class UserService extends AbstractDataObjectService<IUserRepository, User
 		user.setWrongPasswordTries(0);
 		user.setResetPasswordString(null);
 		user.setPassword(passwordEncoder.encode(this.makePassword(user.getUsername(), password)));
-
+		
+		this.repository.save(user);
+		
 		return true;
 	}
 }

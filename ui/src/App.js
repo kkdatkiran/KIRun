@@ -12,6 +12,8 @@ import Logo from "./components/site/Logo";
 import Message from "./components/site/Message";
 
 import { ContactContextProvider } from "./contexts/ContactContext";
+import ActivateUser from "./components/demo/login/ActivateUser";
+import Login from "./components/demo/login/Login";
 
 export default function App() {
   return (
@@ -67,6 +69,32 @@ export default function App() {
               </div>
             </>
           </Route>
+          <Route
+            path="/activateUser/:emailId/:activationString"
+            component={(props) => (
+              <>
+                <Nav />
+                <Logo />
+                <ActivateUser
+                  emailId={props.match?.params?.emailId}
+                  activationString={props.match?.params?.activationString}
+                />
+              </>
+            )}
+          />
+          <Route
+            path="/resetPassword/:emailId/:resetPasswordString"
+            component={(props) => (
+              <>
+                <Nav />
+                <Logo />
+                <Login
+                  emailId={props.match?.params?.emailId}
+                  resetPasswordString={props.match?.params?.resetPasswordString}
+                />
+              </>
+            )}
+          />
         </Switch>
       </Router>
       <Message />
