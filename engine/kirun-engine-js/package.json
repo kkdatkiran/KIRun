@@ -1,0 +1,22 @@
+{
+  "name": "kirun-engine",
+  "version": "1.0.0",
+  "description": "Kinetic Instruction JS Engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkdatkiran/KIRun.git"
+  },
+  "keywords": [
+    "KIRUN"
+  ],
+  "author": "Kiran Kumar Grandhi <kiran.grandhi@gmail.com> (https://kirun.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kkdatkiran/KIRun/issues"
+  },
+  "homepage": "https://github.com/kkdatkiran/KIRun#readme"
+}

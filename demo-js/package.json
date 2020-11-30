@@ -1,15 +1,14 @@
 {
-  "name": "kirun-ui",
+  "name": "demo-js",
   "version": "1.0.0",
-  "description": "Kinetic Instruction Java Runtime UI Application",
+  "license": "MIT",
+  "author": "Kiran Kumar Grandhi <kiran.grandhi@gmail.com> (https://kirun.io)",
+  "description": "Kinetic Instruction JS Runtime UI Application",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production && rm -r ../runtime/src/main/resources/static/* && cp -r public/* ../runtime/src/main/resources/static",
+    "build": "webpack --mode production",
     "start": "webpack-dev-server --open --mode development"
   },
-  "keywords": [],
-  "author": "Kiran Kumar Grandhi",
-  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/plugin-transform-runtime": "^7.12.1",

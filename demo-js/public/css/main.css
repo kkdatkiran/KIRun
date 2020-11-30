@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #f7f7f7;
+  font-family: Roboto, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  overflow: hidden;
+}
+
+#appdiv {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.logo {
+  position: fixed;
+  top: 2vmax;
+  left: 2vmax;
+  transition: top 0.5s ease, left 0.5s ease;
+}
+
+.logo img {
+  width: 7vmax;
+  transition: width 0.5s ease;
+}
+
+.bigTitle {
+  position: fixed;
+  left: 4.5vmax;
+  top: 30vh;
+}
+
+.bigTitle > .title {
+  position: relative;
+}
+
+.title {
+  font-size: 3vmax;
+  font-weight: 200;
+  z-index: 1;
+}
+
+.footer {
+  font-size: 1vmax;
+  font-weight: 400;
+  color: #aaaaaa;
+  position: fixed;
+  left: 1vmax;
+  bottom: 1vh;
+}
+
+#desktopMessage {
+  display: none;
+}
+
+@media only screen and (max-width: 900px) {
+  #appdiv {
+    display: none;
+  }
+
+  #desktopMessage {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    font-size: 25px;
+    font-weight: 400;
+    padding-top: 45vh;
+    text-align: center;
+    color: #aaaaaa;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  nav a,
+  nav a:visited {
+    font-size: 15px;
+  }
+
+  .footer {
+    font-size: 12px;
+  }
+}
