@@ -10,6 +10,7 @@ const GIRD_SIZE_OPTIONS = { small: 10, medium: 20, large: 30 };
 export class KirunEditor {
   @Prop({ attribute: 'theme', mutable: true }) theme: string = 'dark';
   @Prop({ attribute: 'gridSize', mutable: true }) gridSize: string = 'medium';
+  /* Body designer states. */
   @State() bdLeft: number = 0;
   @State() bdTop: number = 0;
   @State() bdOldLeft: number = 0;
@@ -61,10 +62,6 @@ export class KirunEditor {
     e.preventDefault();
   };
 
-  bdResize = e => {
-    console.log(e);
-  };
-
   render() {
     return (
       <div class={`KERoot ${this.theme} `}>
@@ -73,15 +70,16 @@ export class KirunEditor {
           <div class="bodyDesignerContainer">
             <div
               class={`bodyDesigner ${this.bdDragStart ? 'moving' : ''}`}
-              style={{ backgroundSize: `${GIRD_SIZE_OPTIONS[this.gridSize]}px ${GIRD_SIZE_OPTIONS[this.gridSize]}px`, transform: `translate(${this.bdLeft}px, ${this.bdTop}px)` }}
-              draggable
+              style={{
+                backgroundSize: `${GIRD_SIZE_OPTIONS[this.gridSize]}px ${GIRD_SIZE_OPTIONS[this.gridSize]}px`,
+                transform: `translate(${this.bdLeft}px, ${this.bdTop}px)`,
+              }}
               onMouseDown={this.bdDragStarted}
               onMouseUp={this.bdDragEnd}
               onMouseMove={this.bdDragging}
-              onWheel={this.bdResize}
             ></div>
           </div>
-          <div class="rightBar"></div>
+          <kirun-editor-right-bar />
         </div>
       </div>
     );
