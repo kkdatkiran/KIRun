@@ -23,6 +23,7 @@ async function loginNow(dispatch, loginBody) {
     userId: loginBody.userName,
     password: loginBody.password,
   });
+  window.localStorage.setItem("authToken", auth?.token);
   dispatch({ type: LOGIN, payload: auth });
 }
 

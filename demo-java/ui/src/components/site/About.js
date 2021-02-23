@@ -13,9 +13,9 @@ export default function About() {
         My name is <b>Kiran Grandhi</b>. I have been developing applications for{" "}
         {year} years in various domains on multiple platforms, all along I had
         trouble providing a window for an end-user to edit a piece of logic here
-        or there. I recently had a lot of time to thinkk while recovering from
-        COVID-19 while lying on the bed. It gave me a thought about why not
-        define language simple enough to build in JSON.
+        or there. I recently had a lot of time to think while recovering from
+        COVID-19 lying on the bed. It gave me a thought about why not define
+        language simple enough to build in JSON.
         <br />
         <br />
         The objective of this deceptively simple initative is to understand the
@@ -28,10 +28,11 @@ export default function About() {
         visual tool to change the course of execution logic.
         <br />
         <br />
-        This initative will be managed by few people to showcase the idea. The
-        code will be available in the repository for others to accessd and run
-        and see and use the code where and when wanted. Maybe, later we shall
-        make it as a library to be used as a module.
+        This initative will be managed by few people, maybe only one, to
+        showcase the idea. The code will be available in the repository for
+        others to be accessed and run and see and use the code where and when
+        wanted. Maybe, later I shall make it as a library to be used as a
+        module.
       </p>
     </>
   );

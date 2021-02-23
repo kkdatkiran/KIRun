@@ -148,8 +148,9 @@ function loginReducer(state = defaultState, action) {
   }
 }
 
-function LoginContextProvider({ children }) {
-  const [state, dispatch] = React.useReducer(loginReducer, defaultState);
+function LoginContextProvider({ children, auth }) {
+  let firstState = { ...defaultState, auth };
+  const [state, dispatch] = React.useReducer(loginReducer, firstState);
 
   return (
     <LoginStateContext.Provider value={state}>

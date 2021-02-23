@@ -42,7 +42,7 @@ export default function Navigate(props) {
       </nav>
       <div className={props.isDemo ? "demo footer" : "footer"}>
         The contents of this website and the GitHub repository are under the MIT
-        License. &copy;2020
+        License. &copy;{new Date().getFullYear()}
       </div>
     </>
   );
