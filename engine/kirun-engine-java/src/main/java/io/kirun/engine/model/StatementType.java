@@ -8,6 +8,8 @@ public enum StatementType {
 	CASE,
 	CONTINUE,
 	END,
+	ELSE,
+	ELSEIF,
 	EXPRESSION,
 	FINALLY,
 	FUNCTION,
@@ -15,9 +17,11 @@ public enum StatementType {
 	LOOP,
 	START,
 	SWITCH,
+	THEN,
 	THROW,
 	TRY,
 	WHILESTART,
 	WHILEEND,
 	;
 }
+

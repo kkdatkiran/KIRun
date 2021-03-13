@@ -540,6 +540,31 @@ input:-webkit-autofill:active {
 .browser {
   width: 300px;
   border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  flex: 1;
+  overflow: auto;
+  font-size: 13px;
+  color: #555;
+  padding: 4px;
+}
+
+.listItem {
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.listItem.selected {
+  background-color: #d0a179;
+  color: #fff;
+}
+
+.listItem:hover {
+  background-color: #f2c49b;
 }
 
 .demoContainer .filter {
@@ -563,6 +588,9 @@ input:-webkit-autofill:active {
 .demoContainer .header {
   height: 30px;
   background-color: #eee;
+  display: flex;
+  justify-content: left;
+  align-items: center;
 }
 
 .demoContainer .title {
@@ -677,16 +705,64 @@ input:-webkit-autofill:active {
 
 .editor .body {
   flex: 1;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
 }
 
 .editor .selector {
-  position: absolute;
-  background-color: #d0a17966;
-  border: 1px solid #d0a179;
-  width: 5px;
-  height: 5px;
+  fill: #d0a17966;
+  stroke-width: 1;
+  stroke: #d0a179;
+}
+
+.buttonGroup button {
+  margin-right: 2px;
+}
+.buttonGroup {
+  padding: 0px 5px 0px 2px;
+  border-left: 3px double #aaa;
+  /* border-style: double; */
+  border-radius: 4px;
+}
+
+.editor .statement rect.box {
+  width: 45px;
+  height: 45px;
+  rx: 10px;
+  ry: 10px;
+  stroke-width: 2px;
+  fill: #ffffffc0;
+  cursor: pointer;
+  stroke: #a85b37;
+}
+
+.editor .statement rect.box:hover {
+  stroke-width: 5px;
+}
+
+.editor .statement text.nodeTitle {
+  text-anchor: middle;
+  transform: translate(22px, -8px);
+  fill: #555;
+  font-size: 13px;
+}
+
+.editor .statement rect.titleBack {
+  width: 70px;
+  height: 20px;
+  rx: 10px;
+  ry: 10px;
+  fill: #aaaaaa80;
+  transform: translate(-12px, -22px);
+}
+
+.editor .statement.START rect.box {
+  stroke: #e8c092;
+}
+
+.editor .statement.END rect.titleBack {
+  width: 50px;
+  transform: translate(-4px, -22px);
 }
 
 @media only screen and (max-width: 900px) {

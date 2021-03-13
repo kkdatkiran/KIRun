@@ -6,9 +6,9 @@ const MessageDispatchContext = React.createContext();
 
 const defaultState = [];
 
-const ADD_MESSAGE = 1;
-const DELETE_MESSAGE = 2;
-const CLEAR_OLD_MESSAGES = 4;
+const ADD_MESSAGE = 200001;
+const DELETE_MESSAGE = 200002;
+const CLEAR_OLD_MESSAGES = 200004;
 
 function messageReducer(state = defaultState, action) {
   if (!action || !action.type) return;

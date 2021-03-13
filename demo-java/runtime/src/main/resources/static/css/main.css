@@ -202,6 +202,17 @@ nav a:hover {
 .demo.footer {
   left: 1vmax;
   bottom: 1vh;
+  background-color: #eee;
+  padding: 3px 5px;
+  border-radius: 3px;
+  opacity: 0.5;
+  color: #888;
+  z-index: 5;
+}
+
+.demo.footer:hover {
+  opacity: 1;
+  user-select: none;
 }
 
 #desktopMessage {
@@ -508,6 +519,187 @@ input:-webkit-autofill:active {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.demoContainer {
+  padding-top: 85px;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.demoContainer * {
+  outline-color: #7775;
+}
+
+.editor {
+  flex: 1;
+  border: 1px solid #eee;
+}
+
+.browser {
+  width: 300px;
+  border: 1px solid #eee;
+}
+
+.demoContainer .filter {
+  display: flex;
+}
+
+.demoContainer .filter input {
+  margin-right: 3px;
+}
+
+.demoContainer input[type="text"] {
+  border: none;
+  font-size: 13px;
+  padding: 4px;
+  border-radius: 3px;
+  background-color: #ddd;
+  color: #777;
+  flex: 1;
+}
+
+.demoContainer .header {
+  height: 30px;
+  background-color: #eee;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.demoContainer .title {
+  display: inline-block;
+  margin: 6px;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #d1a279;
+  font-weight: 500;
+  user-select: none;
+}
+
+.demoContainer button:hover {
+  background-color: #fff;
+}
+
+.demoContainer button {
+  background-color: #ddd;
+  color: #d0a179;
+  border: 1px;
+  border-radius: 3px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+.popupBack {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #0003;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.popup {
+  width: 25vw;
+  max-height: 70vh;
+  min-height: 25vh;
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup .header {
+  display: flex;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.popup .header .buttonContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+.popup .header button {
+  background: none;
+}
+
+.popup .body {
+  flex: 1;
+  padding: 10px;
+}
+
+.popup .prompt {
+  color: #aaa;
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.popup .popupFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+
+.popup .popupFooter button {
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+}
+
+.editor .bodyDesigner.moving {
+  cursor: grabbing;
+}
+
+.editor .bodyDesigner {
+  position: absolute;
+  width: 3000px;
+  height: 3000px;
+  background-color: #fff;
+  background-size: 20px 20px;
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 0px
+    ),
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0px);
+}
+
+.editor .body {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.editor .selector {
+  position: absolute;
+  background-color: #d0a17966;
+  border: 1px solid #d0a179;
+  width: 5px;
+  height: 5px;
+}
+
+.editor .buttonGroup button {
+  margin-right: 2px;
+}
+.editor .buttonGroup {
+  padding: 0px 5px 0px 2px;
+  border-left: 3px double #aaa;
+  /* border-style: double; */
+  border-radius: 4px;
 }
 
 @media only screen and (max-width: 900px) {

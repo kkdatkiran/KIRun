@@ -20,6 +20,7 @@ import org.springframework.data.repository.support.PageableExecutionUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import io.kirun.runtime.exception.DefaultRuntimeException;
 import io.kirun.runtime.exception.NotFoundException;
 import io.kirun.runtime.model.AbstractDataObject;
 import io.kirun.runtime.security.SecurityContextUtil;
@@ -40,6 +41,9 @@ public class AbstractDataObjectService<R extends MongoRepository<D, String>, D e
 	public AbstractDataObjectService() {
 		super();
 		Class<?>[] classArray = GenericTypeResolver.resolveTypeArguments(getClass(), AbstractDataObjectService.class);
+		if (classArray == null)
+			throw new DefaultRuntimeException("Unknown error occurred.");
+		
 		this.entityType = (Class<D>) classArray[1];
 		this.logger = LoggerFactory.getLogger(this.getClass());
 	}

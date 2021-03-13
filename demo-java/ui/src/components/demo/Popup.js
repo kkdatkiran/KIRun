@@ -23,7 +23,13 @@ export default function Popup({
       onClick={close(onButtonClick, closeButtonName)}
       onKeyUp={() => {}}
     >
-      <div className="popup">
+      <div
+        className="popup"
+        role="button"
+        tabIndex="0"
+        onClick={(e) => e.stopPropagation()}
+        onKeyUp={() => {}}
+      >
         <div className="header">
           <div className="title">{title}</div>
           <div className="buttonContainer">

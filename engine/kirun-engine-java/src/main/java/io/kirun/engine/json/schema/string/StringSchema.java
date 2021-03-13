@@ -13,6 +13,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class StringSchema extends Schema{
 
+
+	private static final long serialVersionUID = 5665601576555771876L;
+
 	@Override
 	public Type getType() {
 		return new SingleType().setType(SchemaType.STRING);

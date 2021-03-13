@@ -6,14 +6,15 @@ import Home from "./components/site/Home";
 import About from "./components/site/About";
 import Docs from "./components/site/Docs";
 import ContactUs from "./components/site/ContactUs";
-import Demo from "./components/demo/Demo";
+import DemoServerClient from "./components/demo/server-client/DemoServerClient";
+import DemoClient from "./components/demo/client-only/DemoClient";
 import LeftSide from "./components/site/LeftSide";
 import Logo from "./components/site/Logo";
 import Message from "./components/site/Message";
 
 import { ContactContextProvider } from "./contexts/ContactContext";
-import ActivateUser from "./components/demo/login/ActivateUser";
-import Login from "./components/demo/login/Login";
+import ActivateUser from "./components/demo/server-client/login/ActivateUser";
+import Login from "./components/demo/server-client/login/Login";
 
 export default function App() {
   return (
@@ -40,11 +41,18 @@ export default function App() {
               </div>
             </>
           </Route>
-          <Route path="/demo">
+          <Route path="/demoJava">
             <>
               <Nav isDemo={true} />
               <Logo isDemo={true} />
-              <Demo />
+              <DemoServerClient />
+            </>
+          </Route>
+          <Route path="/demoJS">
+            <>
+              <Nav isDemo={true} />
+              <Logo isDemo={true} />
+              <DemoClient />
             </>
           </Route>
           <Route path="/about">

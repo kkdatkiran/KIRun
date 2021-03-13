@@ -1,5 +1,6 @@
 package io.kirun.engine.json.schema;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,9 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class Schema {
+public class Schema implements Serializable{
+
+	private static final long serialVersionUID = 4041990622586726910L;
 
 	private String namespace;
 	

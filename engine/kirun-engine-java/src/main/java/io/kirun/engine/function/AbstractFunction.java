@@ -22,7 +22,7 @@ public abstract class AbstractFunction implements Function {
 		for (Parameter param : this.getSignature().getParameters()) {
 			List<Argument> argList = args.get(param.getName());
 
-			if (!param.isVariableArgument() && argList.size() != 1)
+			if (!param.isVariableArgument() && (argList == null || argList.size() != 1))
 				throw new ExecutionException("Expects one argument with name " + param.getName());
 			
 			if (argList != null)

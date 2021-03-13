@@ -11,10 +11,10 @@ public class HybridRepository<T> implements Repository<T> {
 	}
 
 	@Override
-	public T findSchema(String name) {
+	public T find(String name) {
 
 		for (Repository<T> repo : this.repos) {
-			T s = repo.findSchema(name);
+			T s = repo.find(name);
 			if (s != null)
 				return s;
 		}

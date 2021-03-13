@@ -32,7 +32,7 @@ public class SchemaValidator {
 			if (definitions != null && definitions.containsKey(schema.getRef()))
 				s = definitions.get(schema.getRef());
 			if (s == null)
-				s = repository.findSchema(schema.getRef());
+				s = repository.find(schema.getRef());
 
 			return validate(parents, s, repository, element);
 		}

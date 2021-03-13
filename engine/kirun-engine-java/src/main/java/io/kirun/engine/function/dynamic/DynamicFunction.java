@@ -22,7 +22,7 @@ public class DynamicFunction implements Function {
 
 	@Override
 	public FunctionSignature getSignature() {
-		return def.getSignature();
+		return def;
 	}
 
 	public void debug(List<Argument> arguments) {

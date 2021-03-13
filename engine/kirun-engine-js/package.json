@@ -1,10 +1,11 @@
 {
-  "name": "kirun-engine",
+  "name": "kirun-engine-js",
   "version": "1.0.0",
-  "description": "Kinetic Instruction JS Engine",
+  "description": "Kinetic Instruction Runtime JS Engine",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel src --watch -d dist"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/kkdatkiran/KIRun/issues"
   },
-  "homepage": "https://github.com/kkdatkiran/KIRun#readme"
+  "homepage": "https://github.com/kkdatkiran/KIRun#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.10",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "eslint": "^7.22.0",
+    "prettier": "^2.2.1"
+  }
 }

@@ -6,9 +6,19 @@ import {
   faPlus,
   faTimesCircle,
   faBorderAll,
+  faProjectDiagram,
+  faCode,
+  faTree,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faPlus, faTimesCircle, faBorderAll);
+library.add(
+  faPlus,
+  faTimesCircle,
+  faBorderAll,
+  faProjectDiagram,
+  faCode,
+  faTree
+);
 
 import App from "./App";
 
@@ -27,7 +37,7 @@ async function refreshToken() {
   const token = window.localStorage.getItem("authToken");
   if (!token) return Promise.resolve(undefined);
 
-  const auth = await refreshLogin();
+  const { data: { data: auth } = {} } = await refreshLogin();
   return auth;
 }
 

@@ -4,13 +4,13 @@ const ContactStateContext = React.createContext();
 const ContactDispatchContext = React.createContext();
 const defaultState = {};
 
-const ADD_CAPTCHA_INFO = 1;
-const NAME_CHANGE = 2;
-const EMAIL_CHANGE = 4;
-const MESSAGE_CHANGE = 6;
-const CAPTCHA_CHANGE = 8;
-const VALIDATE_FORM = 16;
-const CLEAR_FORM = 32;
+const ADD_CAPTCHA_INFO = 100001;
+const NAME_CHANGE = 100002;
+const EMAIL_CHANGE = 100004;
+const MESSAGE_CHANGE = 100006;
+const CAPTCHA_CHANGE = 100008;
+const VALIDATE_FORM = 1000016;
+const CLEAR_FORM = 1000032;
 
 const MAP = {
   [NAME_CHANGE]: { key: "name", errorKey: "nameError", title: "Name" },

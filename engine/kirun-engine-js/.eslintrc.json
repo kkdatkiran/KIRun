@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors", // if that file exports something the other file can import it and if it doesn't export it cant be imported somewhere else
+    "prettier" // this two prettier rule set must be the last thing
+  ],
+  "rules": {
+    // this is where we can turn on and off specific rules
+    "no-console": 1 // console.log() will be a warning if this equals 1
+  },
+  "plugins": ["react", "import"], // here we include the plugins as well, this is like new abilities for ESLint
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  }
+}

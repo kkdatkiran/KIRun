@@ -9,6 +9,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SingleType implements Type {
 	
+	private static final long serialVersionUID = -6709929624465529827L;
+	
 	private SchemaType type;
 
 	public Set<SchemaType> getAllowedSchemaTypes() {

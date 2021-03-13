@@ -9,6 +9,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class MultipleType implements Type {
 
+	private static final long serialVersionUID = -8138857609871683543L;
+
 	private Set<SchemaType> type;
 
 	@Override

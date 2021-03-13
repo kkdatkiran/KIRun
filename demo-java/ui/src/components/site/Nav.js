@@ -25,8 +25,13 @@ export default function Navigate(props) {
           </NavLink>
         </div>
         <div className="demo">
-          <NavLink to="/demo" activeClassName="activeLink">
-            DEMO
+          <NavLink to="/demoJava" activeClassName="activeLink">
+            DEMO Java
+          </NavLink>
+        </div>
+        <div className="demo">
+          <NavLink to="/demoJS" activeClassName="activeLink">
+            DEMO JS
           </NavLink>
         </div>
         <div className="about">
