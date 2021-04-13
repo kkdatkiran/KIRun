@@ -4,45 +4,48 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+
+var _constants = require("./constants");
+
 var schemas = {
   INTEGER: {
-    type: "INTEGER",
+    type: _constants.SchemaType.INTEGER,
     notDeletable: true
   },
   LONG: {
-    type: "LONG",
+    type: _constants.SchemaType.LONG,
     notDeletable: true
   },
   FLOAT: {
-    type: "FLOAT",
+    type: _constants.SchemaType.FLOAT,
     notDeletable: true
   },
   DOUBLE: {
-    type: "DOUBLE",
+    type: _constants.SchemaType.DOUBLE,
     notDeletable: true
   },
   OBJECT: {
-    type: "OBJECT",
+    type: _constants.SchemaType.OBJECT,
     notDeletable: true
   },
   STRING: {
-    type: "STRING",
+    type: _constants.SchemaType.STRING,
     notDeletable: true
   },
   BOOLEAN: {
-    type: "BOOLEAN",
+    type: _constants.SchemaType.BOOLEAN,
     notDeletable: true
   },
   NULL: {
-    type: "NULL",
+    type: _constants.SchemaType.NULL,
     notDeletable: true
   },
   ARRAY: {
-    type: "ARRAY",
+    type: _constants.SchemaType.ARRAY,
     notDeletable: true
   },
   NUMERIC: {
-    type: ["INTEGER", "LONG", "DOUBLE", "FLOAT"],
+    type: [_constants.SchemaType.INTEGER, _constants.SchemaType.LONG, _constants.SchemaType.DOUBLE, _constants.SchemaType.FLOAT],
     notDeletable: true
   }
 };
@@ -69,3 +72,4 @@ var schemaRepository = {
 };
 var _default = schemaRepository;
 exports["default"] = _default;
+//# sourceMappingURL=index.js.map

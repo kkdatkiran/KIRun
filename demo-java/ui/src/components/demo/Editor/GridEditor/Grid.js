@@ -1,93 +1,235 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Node from "./Node";
 
-function mouseDown({ event, setDragInfo, dragInfo, container, setSelector }) {
-  if (event.button !== 0) return;
-  event.preventDefault();
-  if (event.altKey) {
-    setDragInfo({
-      ...dragInfo,
+import { onStatementTypeChange, onDragNodeStart, onDragNodeEnd, onAddStatement, onKeyUp } from "./gridFunctions";
+
+function mouseDown(e, { setScrMove, scrMove, container, setSelector }) {
+  if (e.buttons !== 1) return;
+  e.preventDefault();
+
+  if (e.altKey) {
+    setScrMove({
+      ...scrMove,
       dragStart: true,
-      startLeft: event.screenX,
-      startTop: event.screenY,
+      startLeft: e.screenX,
+      startTop: e.screenY,
       oldLeft: container.current.scrollLeft,
       oldTop: container.current.scrollTop,
     });
   } else {
     const rect = container.current.getBoundingClientRect();
+    const left = e.clientX - rect.left + container.current.scrollLeft;
+    const top = e.clientY - rect.top + container.current.scrollTop;
+
     setSelector({
       selectionStart: true,
-      left: event.clientX - rect.left + container.current.scrollLeft,
-      top: event.clientY - rect.top + container.current.scrollTop,
+      left,
+      top,
     });
   }
 }
 
-function mouseMove({
-  event,
-  selectionStart,
-  container,
-  gridSize,
-  setSelector,
-  selector,
-  dragInfo: { dragStart, startLeft, startTop, oldLeft, oldTop },
-}) {
-  event.preventDefault();
-  if (selectionStart) {
-    const rect = container.current.getBoundingClientRect();
-    const { left, top } = selector;
-    if (event.clientY - rect.top < gridSize * 1.5)
-      container.current.scrollTop -= gridSize / 2;
-    else if (event.clientY - rect.top + gridSize * 1.5 > rect.height)
-      container.current.scrollTop += gridSize / 2;
-    if (event.clientX - rect.left < gridSize * 1.5)
-      container.current.scrollLeft -= gridSize / 2;
-    else if (event.clientX - rect.left + gridSize * 1.5 > rect.width)
-      container.current.scrollLeft += gridSize / 2;
+function mouseMove(e, { selectionStart, container, options, setSelector, selector, scrMove, dragNode, setDragNode, sNodes }) {
+  const rect = container.current.getBoundingClientRect();
+  const { gridSize } = options;
+  const { dragStart, startLeft, startTop, oldLeft, oldTop } = scrMove;
 
+  if (selectionStart || dragNode) {
+    if (e.clientY - rect.top < gridSize * 1.5) container.current.scrollTop -= gridSize / 2;
+    else if (e.clientY - rect.top + gridSize * 1.5 > rect.height) container.current.scrollTop += gridSize / 2;
+    if (e.clientX - rect.left < gridSize * 1.5) container.current.scrollLeft -= gridSize / 2;
+    else if (e.clientX - rect.left + gridSize * 1.5 > rect.width) container.current.scrollLeft += gridSize / 2;
+  }
+
+  if (selectionStart) {
+    e.preventDefault();
+    const { left, top } = selector;
     setSelector({
       ...selector,
-      width: event.clientX - rect.left - left + container.current.scrollLeft,
-      height: event.clientY - rect.top - top + container.current.scrollTop,
+      width: e.clientX - rect.left - left + container.current.scrollLeft,
+      height: e.clientY - rect.top - top + container.current.scrollTop,
     });
   } else if (dragStart) {
-    if (event.screenX === 0 && event.screenY === 0) return;
-    const x = event.screenX - startLeft;
-    const y = event.screenY - startTop;
-    container.current.scrollLeft =
-      gridSize * Math.round((oldLeft - x) / gridSize);
-    container.current.scrollTop =
-      gridSize * Math.round((oldTop - y) / gridSize);
+    e.preventDefault();
+    if (e.screenX === 0 && e.screenY === 0) return;
+    const x = e.screenX - startLeft;
+    const y = e.screenY - startTop;
+    if (dragStart) {
+      container.current.scrollLeft = gridSize * Math.round((oldLeft - x) / gridSize);
+      container.current.scrollTop = gridSize * Math.round((oldTop - y) / gridSize);
+    }
+  } else if (dragNode) {
+    e.preventDefault();
+    if (!sNodes) return;
+    const left = e.clientX - rect.left - dragNode.start.left + container.current.scrollLeft;
+    const top = e.clientY - rect.top - dragNode.start.top + container.current.scrollTop;
+    setDragNode({ ...dragNode, delta: { left, top } });
   }
 }
 
-function generateNodes({ code }) {
+function mouseUp({ selector, code, sNodes, setSNodes, dragNode, setDragNode, scrMove, setScrMove, setSelector, onChange }) {
+  if (!dragNode && !scrMove.dragStart && !selector?.width) {
+    setSNodes({});
+  }
+  if (!dragNode && selector.selectionStart) {
+    let { left, top, width, height } = selector;
+    if (width && height) {
+      width = left + width;
+      height = top + height;
+      if (left > width) {
+        const t = left;
+        left = width;
+        width = t;
+      }
+      if (top > height) {
+        const t = top;
+        top = height;
+        height = t;
+      }
+
+      const nodes = Object.entries(code?.definition?.steps || {})
+        .filter(([, v]) => {
+          const { properties: { x, y } = {} } = v;
+          return left <= x && x <= width && top <= y && y <= height;
+        })
+        .reduce((a, [k]) => {
+          a[k] = true;
+          return a;
+        }, {});
+      setSNodes(nodes);
+    }
+  }
+  setScrMove({ ...scrMove, dragStart: false });
+  setSelector({ ...selector, selectionStart: false });
+  if (dragNode) {
+    setDragNode(undefined);
+    onDragNodeEnd({ code, onChange, sNodes, dragNode });
+  }
+}
+
+function generateNodes({ code, engine, container, options, onChange, sNodes, setSNodes, dragNode, setDragNode, setChType }) {
   if (!code?.definition?.steps) return;
+  const { delta: { left: dx, top: dy } = {} } = dragNode ?? {};
   return Object.entries(code.definition.steps).map(([k, s]) => (
-    <Node key={k} id={k} node={s} />
+    <Node
+      key={k}
+      id={k}
+      node={dragNode && sNodes[k] ? { ...s, properties: { ...s.properties, x: s.properties.x + dx, y: s.properties.y + dy } } : s}
+      engine={engine}
+      container={container}
+      options={options}
+      selected={sNodes?.[k]}
+      onChange={(id, node) => {
+        let x = JSON.parse(JSON.stringify(code));
+        x.definition.steps[id] = node;
+        onChange(x);
+      }}
+      onDragStart={(append, id, start) => onDragNodeStart({ append, id, start, sNodes, setSNodes, setDragNode })}
+      onClick={(append, id) => {
+        if (!append) {
+          setSNodes({ [id]: true });
+        } else {
+          const x = sNodes ? { ...sNodes } : {};
+          if (x[id]) delete x[id];
+          else x[id] = true;
+          setSNodes(x);
+        }
+      }}
+      onTypeChange={(data) => setChType(data)}
+    />
   ));
 }
 
-function addStatement() {}
+function generateContextMenu({ code, contextMenu, setContextMenu, sNodes, setSNodes, onChange, container }) {
+  if (!contextMenu) return undefined;
 
-export default function Grid({
-  container,
-  code,
-  onChange,
-  version,
-  options: { gridSize },
-}) {
-  //Hooks
-  const [dragInfo, setDragInfo] = useState({ dragStart: false });
-  const [selector, setSelector] = useState({
-    selectionStart: false,
-    width: 0,
-    height: 0,
-  });
+  let deleteItem = undefined;
+  const selectedCount = Object.keys(sNodes ?? {}).length;
+
+  if (selectedCount !== 0)
+    deleteItem = (
+      <div
+        className="ctxMenuItem"
+        tabIndex="0"
+        role="button"
+        onKeyPress={() => {}}
+        onClick={() => onKeyUp({ code: "Delete" }, { code, sNodes, setSNodes, onChange })}
+      >
+        Delete Selected Statements
+      </div>
+    );
+
+  return (
+    <div className="ctxMenuBack" tabIndex="0" role="button" onKeyPress={() => {}} onClick={() => setContextMenu(undefined)}>
+      <div className="ctxMenu" style={{ left: `${contextMenu.x}px`, top: `${contextMenu.y}px` }}>
+        <div
+          className="ctxMenuItem"
+          tabIndex="0"
+          role="button"
+          onKeyPress={() => {}}
+          onClick={() => onAddStatement({ clientX: contextMenu.x, clientY: contextMenu.y }, { code, container, onChange })}
+        >
+          Add Statement
+        </div>
+        {deleteItem}
+      </div>
+    </div>
+  );
+}
+
+function generateTypeMenu({ chType, setChType, code, onChange, engine, container }) {
+  if (!chType) return undefined;
+
+  const rect = container.current.getBoundingClientRect();
+  let x = chType.x;
+  let y = chType.y;
+
+  if (chType.x > rect.left + rect.width - 275) x -= 275;
+  if (chType.y > rect.top + rect.height - 160) y -= 160;
+
+  return (
+    <div className="ctxMenuBack" tabIndex="0" role="button" onKeyPress={() => {}} onClick={() => setChType(undefined)}>
+      <div className="ctxMenu groups statements" style={{ left: `${x}px`, top: `${y}px` }}>
+        {Object.keys(engine.statements)
+          .sort()
+          .reduce((a, c, i) => {
+            const ind = i % 3;
+            if (!a[ind]) a[ind] = [];
+            a[ind].push(c);
+            return a;
+          }, [])
+          .map((arr) => (
+            <div className="ctxMenuGroup" key={arr.join("")}>
+              {arr.map((e) => (
+                <div
+                  key={e}
+                  className={`ctxMenuItem ${code.definition.steps[chType.id] === e ? "selected" : ""}`}
+                  tabIndex="0"
+                  role="button"
+                  onKeyPress={() => {}}
+                  onClick={() => onStatementTypeChange({ code, chType, toType: e, engine, onChange })}
+                >
+                  {e}
+                </div>
+              ))}
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+}
+
+export default function Grid({ container, code, onChange, engine, options }) {
+  const [scrMove, setScrMove] = useState({ dragStart: false });
+  const [selector, setSelector] = useState({ selectionStart: false, width: 0, height: 0 });
+  const [sNodes, setSNodes] = useState();
   const [dragNode, setDragNode] = useState();
-  const [selectedNode, setSelectedNode] = useState();
+  const [contextMenu, setContextMenu] = useState();
+  const [chType, setChType] = useState();
 
-  const { dragStart } = dragInfo;
+  const svgRef = useRef();
+
+  const { dragStart } = scrMove;
   const { selectionStart, left, top, width = 0, height = 0 } = selector;
 
   let dragger = undefined;
@@ -101,33 +243,42 @@ export default function Grid({
         height={Math.abs(height)}
       />
     );
+
+  let ctxMenu = generateContextMenu({ code, contextMenu, setContextMenu, sNodes, setSNodes, onChange, container });
+  let typeMenu = generateTypeMenu({ chType, setChType, code, onChange, engine, container });
+
   return (
-    <svg
-      role="presentation"
-      className={`bodyDesigner ${dragStart ? "moving" : ""}`}
-      style={{ backgroundSize: `${gridSize}px ${gridSize}px` }}
-      onMouseDown={(event) =>
-        mouseDown({ event, setDragInfo, dragInfo, container, setSelector })
-      }
-      onMouseUp={() => {
-        setDragInfo({ ...dragInfo, dragStart: false });
-        setSelector({ ...selector, selectionStart: false });
-      }}
-      onMouseMove={(event) =>
-        mouseMove({
-          event,
-          selectionStart,
-          container,
-          gridSize,
-          setSelector,
-          selector,
-          dragInfo,
-        })
-      }
-      onClick={(event) => addStatement({ event, code, onChange })}
-    >
-      {generateNodes({ code })}
-      {dragger}
-    </svg>
+    <>
+      <svg
+        role="button"
+        tabIndex="0"
+        className={`bodyDesigner ${dragStart ? "moving" : ""}`}
+        style={{ backgroundSize: `${options.gridSize}px ${options.gridSize}px` }}
+        ref={svgRef}
+        onMouseDown={(e) => mouseDown(e, { setScrMove, scrMove, container, setSelector, code })}
+        onMouseUp={() =>
+          mouseUp({ selector, code, sNodes, setSNodes, dragNode, setDragNode, scrMove, setScrMove, setSelector, onChange })
+        }
+        onMouseMove={(e) =>
+          mouseMove(e, { selectionStart, container, options, setSelector, selector, scrMove, dragNode, setDragNode, sNodes })
+        }
+        onDoubleClick={(e) => onAddStatement(e, { code, container, onChange })}
+        onKeyPress={(e) => onKeyUp(e, { code, sNodes, setSNodes, onChange })}
+        // onClick={(e) => {
+        //   if (e.buttons !== 1 || !svgRef.current) return;
+        //   svgRef.current.focus();
+        // }}
+        onContextMenu={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setContextMenu({ x: e.clientX, y: e.clientY });
+        }}
+      >
+        {generateNodes({ code, engine, container, options, onChange, sNodes, setSNodes, dragNode, setDragNode, setChType })}
+        {dragger}
+      </svg>
+      {ctxMenu}
+      {typeMenu}
+    </>
   );
 }

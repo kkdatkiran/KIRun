@@ -11,11 +11,7 @@ export default function Navigate(props) {
           </NavLink>
         </div>
         <div className="github">
-          <a
-            href="https://github.com/kkdatkiran/KIRun"
-            rel="noreferrer"
-            target="_blank"
-          >
+          <a href="https://github.com/kkdatkiran/KIRun" rel="noreferrer" target="_blank">
             GITHUB
           </a>
         </div>
@@ -46,8 +42,7 @@ export default function Navigate(props) {
         </div>
       </nav>
       <div className={props.isDemo ? "demo footer" : "footer"}>
-        The contents of this website and the GitHub repository are under the MIT
-        License. &copy;{new Date().getFullYear()}
+        The contents of this website and the GitHub repository are under the MIT License. &copy;{new Date().getFullYear()}
       </div>
     </>
   );

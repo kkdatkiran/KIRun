@@ -60,14 +60,10 @@ export default function ContactUs() {
   }, []);
 
   let nameErrorMsg, emailErrorMsg, messageErrorMsg, captchaErrorMsg;
-  if (nameError)
-    nameErrorMsg = <div className="errorMessage"> {nameError} </div>;
-  if (emailError)
-    emailErrorMsg = <div className="errorMessage"> {emailError} </div>;
-  if (messageError)
-    messageErrorMsg = <div className="errorMessage"> {messageError} </div>;
-  if (captchaError)
-    captchaErrorMsg = <div className="errorMessage"> {captchaError} </div>;
+  if (nameError) nameErrorMsg = <div className="errorMessage"> {nameError} </div>;
+  if (emailError) emailErrorMsg = <div className="errorMessage"> {emailError} </div>;
+  if (messageError) messageErrorMsg = <div className="errorMessage"> {messageError} </div>;
+  if (captchaError) captchaErrorMsg = <div className="errorMessage"> {captchaError} </div>;
 
   return (
     <>
@@ -87,9 +83,7 @@ export default function ContactUs() {
             name="name"
             spellCheck="false"
             value={name}
-            onChange={(e) =>
-              dispatch({ type: NAME_CHANGE, payload: e.target.value })
-            }
+            onChange={(e) => dispatch({ type: NAME_CHANGE, payload: e.target.value })}
           />
           {nameErrorMsg}
         </div>
@@ -102,9 +96,7 @@ export default function ContactUs() {
             id="_replyto"
             name="_replyto"
             value={email}
-            onChange={(e) =>
-              dispatch({ type: EMAIL_CHANGE, payload: e.target.value })
-            }
+            onChange={(e) => dispatch({ type: EMAIL_CHANGE, payload: e.target.value })}
           />
           {emailErrorMsg}
         </div>
@@ -118,9 +110,7 @@ export default function ContactUs() {
             rows="6"
             spellCheck="false"
             value={message}
-            onChange={(e) =>
-              dispatch({ type: MESSAGE_CHANGE, payload: e.target.value })
-            }
+            onChange={(e) => dispatch({ type: MESSAGE_CHANGE, payload: e.target.value })}
           ></textarea>
           {messageErrorMsg}
         </div>
@@ -139,9 +129,7 @@ export default function ContactUs() {
             id="captcha"
             name="captcha"
             value={captcha}
-            onChange={(e) =>
-              dispatch({ type: CAPTCHA_CHANGE, payload: e.target.value })
-            }
+            onChange={(e) => dispatch({ type: CAPTCHA_CHANGE, payload: e.target.value })}
           />
           {captchaErrorMsg}
         </div>

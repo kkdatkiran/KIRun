@@ -2,23 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faPlus,
-  faTimesCircle,
-  faBorderAll,
-  faProjectDiagram,
-  faCode,
-  faTree,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTimesCircle, faBorderAll, faProjectDiagram, faCode, faTree } from "@fortawesome/free-solid-svg-icons";
 
-library.add(
-  faPlus,
-  faTimesCircle,
-  faBorderAll,
-  faProjectDiagram,
-  faCode,
-  faTree
-);
+library.add(faPlus, faTimesCircle, faBorderAll, faProjectDiagram, faCode, faTree);
 
 import App from "./App";
 

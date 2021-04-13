@@ -4,8 +4,9 @@
   "description": "Kinetic Instruction Runtime JS Engine",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel src --watch -d dist"
+    "test": "jest",
+    "start": "concurrently \"babel src --watch --source-maps -d dist \" \"jest --watchAll test\"",
+    "pretty": "prettier --write ./src"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,10 @@
     "@babel/node": "^7.13.10",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
+    "babel-jest": "^26.6.3",
+    "concurrently": "^6.0.0",
     "eslint": "^7.22.0",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1"
   }
 }

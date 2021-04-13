@@ -61,9 +61,7 @@ function MessageContextProvider({ children }) {
 
   return (
     <MessageStateContext.Provider value={state}>
-      <MessageDispatchContext.Provider value={dispatch}>
-        {children}
-      </MessageDispatchContext.Provider>
+      <MessageDispatchContext.Provider value={dispatch}>{children}</MessageDispatchContext.Provider>
     </MessageStateContext.Provider>
   );
 }
@@ -71,18 +69,14 @@ function MessageContextProvider({ children }) {
 function useMessageContextState() {
   const ctx = React.useContext(MessageStateContext);
   if (!ctx)
-    throw new Error(
-      "Unable create context for message context. Please use in components wrapped in MessageContextProvider."
-    );
+    throw new Error("Unable create context for message context. Please use in components wrapped in MessageContextProvider.");
   return ctx;
 }
 
 function useMessageContextDispatch() {
   const ctx = React.useContext(MessageDispatchContext);
   if (!ctx)
-    throw new Error(
-      "Unable create context for message context. Please use in components wrapped in MessageContextProvider."
-    );
+    throw new Error("Unable create context for message context. Please use in components wrapped in MessageContextProvider.");
   return ctx;
 }
 

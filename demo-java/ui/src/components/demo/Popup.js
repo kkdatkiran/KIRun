@@ -8,28 +8,10 @@ function close(onButtonClick, closeButtonName) {
   };
 }
 
-export default function Popup({
-  buttons,
-  title,
-  children,
-  onButtonClick,
-  closeButtonName,
-}) {
+export default function Popup({ buttons, title, children, onButtonClick, closeButtonName }) {
   return (
-    <div
-      className="popupBack"
-      role="button"
-      tabIndex="0"
-      onClick={close(onButtonClick, closeButtonName)}
-      onKeyUp={() => {}}
-    >
-      <div
-        className="popup"
-        role="button"
-        tabIndex="0"
-        onClick={(e) => e.stopPropagation()}
-        onKeyUp={() => {}}
-      >
+    <div className="popupBack" role="button" tabIndex="0" onClick={close(onButtonClick, closeButtonName)} onKeyUp={() => {}}>
+      <div className="popup" role="button" tabIndex="0" onClick={(e) => e.stopPropagation()} onKeyUp={() => {}}>
         <div className="header">
           <div className="title">{title}</div>
           <div className="buttonContainer">

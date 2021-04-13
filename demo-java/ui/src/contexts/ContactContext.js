@@ -71,9 +71,7 @@ function ContactContextProvider({ children }) {
 
   return (
     <ContactStateContext.Provider value={state}>
-      <ContactDispatchContext.Provider value={dispatch}>
-        {children}
-      </ContactDispatchContext.Provider>
+      <ContactDispatchContext.Provider value={dispatch}>{children}</ContactDispatchContext.Provider>
     </ContactStateContext.Provider>
   );
 }
@@ -81,18 +79,14 @@ function ContactContextProvider({ children }) {
 function useContactContextState() {
   const ctx = React.useContext(ContactStateContext);
   if (!ctx)
-    throw new Error(
-      "Unable create context for contact context. Please use in components wrapped in ContactContextProvider."
-    );
+    throw new Error("Unable create context for contact context. Please use in components wrapped in ContactContextProvider.");
   return ctx;
 }
 
 function useContactContextDispatch() {
   const ctx = React.useContext(ContactDispatchContext);
   if (!ctx)
-    throw new Error(
-      "Unable create context for contact context. Please use in components wrapped in ContactContextProvider."
-    );
+    throw new Error("Unable create context for contact context. Please use in components wrapped in ContactContextProvider.");
   return ctx;
 }
 

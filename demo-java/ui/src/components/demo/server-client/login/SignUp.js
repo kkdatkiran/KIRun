@@ -22,15 +22,7 @@ async function signUpUserLocal(dispatch, signUpUser) {
     user: { email, password, retypePassword, firstName, lastName },
     captcha,
   } = signUpUser;
-  if (
-    !email ||
-    !captcha ||
-    !password ||
-    !retypePassword ||
-    !firstName ||
-    !lastName ||
-    password !== retypePassword
-  ) {
+  if (!email || !captcha || !password || !retypePassword || !firstName || !lastName || password !== retypePassword) {
     dispatch({ type: VALIDATE_SIGN_UP_FORM });
     return;
   }
@@ -73,25 +65,17 @@ export default function ForgotPassword(props) {
     getData(dispatch);
   }, []);
 
-  const userNameErrorComponent = userNameError ? (
-    <div className="errorMessage">{userNameError}</div>
-  ) : undefined;
+  const userNameErrorComponent = userNameError ? <div className="errorMessage">{userNameError}</div> : undefined;
 
-  const passwordErrorComponent = passwordError ? (
-    <div className="errorMessage">{passwordError}</div>
-  ) : undefined;
+  const passwordErrorComponent = passwordError ? <div className="errorMessage">{passwordError}</div> : undefined;
 
   const retypePasswordErrorComponent = retypePasswordError ? (
     <div className="errorMessage">{retypePasswordError}</div>
   ) : undefined;
 
-  const firstNameErrorComponent = firstNameError ? (
-    <div className="errorMessage">{firstNameError}</div>
-  ) : undefined;
+  const firstNameErrorComponent = firstNameError ? <div className="errorMessage">{firstNameError}</div> : undefined;
 
-  const lastNameErrorComponent = lastNameError ? (
-    <div className="errorMessage">{lastNameError}</div>
-  ) : undefined;
+  const lastNameErrorComponent = lastNameError ? <div className="errorMessage">{lastNameError}</div> : undefined;
 
   const captchaErrorComponent = signUpCaptchaCaptchaError ? (
     <div className="errorMessage">{signUpCaptchaCaptchaError}</div>
@@ -109,9 +93,7 @@ export default function ForgotPassword(props) {
           name="userName"
           spellCheck="false"
           value={userName}
-          onChange={(e) =>
-            dispatch({ type: CHANGE_USERNAME, payload: e.target.value })
-          }
+          onChange={(e) => dispatch({ type: CHANGE_USERNAME, payload: e.target.value })}
         />
         {userNameErrorComponent}
       </div>
@@ -126,9 +108,7 @@ export default function ForgotPassword(props) {
             name="password"
             spellCheck="false"
             value={password}
-            onChange={(e) =>
-              dispatch({ type: CHANGE_PASSWORD, payload: e.target.value })
-            }
+            onChange={(e) => dispatch({ type: CHANGE_PASSWORD, payload: e.target.value })}
           />
           {passwordErrorComponent}
         </div>
@@ -163,9 +143,7 @@ export default function ForgotPassword(props) {
             name="firstName"
             spellCheck="false"
             value={firstName}
-            onChange={(e) =>
-              dispatch({ type: CHANGE_FIRST_NAME, payload: e.target.value })
-            }
+            onChange={(e) => dispatch({ type: CHANGE_FIRST_NAME, payload: e.target.value })}
           />
           {firstNameErrorComponent}
         </div>
@@ -179,9 +157,7 @@ export default function ForgotPassword(props) {
             name="lastName"
             spellCheck="false"
             value={lastName}
-            onChange={(e) =>
-              dispatch({ type: CHANGE_LAST_NAME, payload: e.target.value })
-            }
+            onChange={(e) => dispatch({ type: CHANGE_LAST_NAME, payload: e.target.value })}
           />
           {lastNameErrorComponent}
         </div>

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/functions/Math/index.js"],"names":[],"mappings":";;;;;;;;;;;;;;AAAA","sourcesContent":["export { default as Abs } from \"./Abs.js\";\n"],"file":"index.js"}

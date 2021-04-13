@@ -29,8 +29,7 @@ public class Schema implements Serializable{
 	private List<Schema> oneOf;
 	private Schema not;
 
-	private Map<String, Schema> definitions;
-	private String ref;
+	private Map<String, Schema> definitions;	
 
 	private String title;
 	private String description;

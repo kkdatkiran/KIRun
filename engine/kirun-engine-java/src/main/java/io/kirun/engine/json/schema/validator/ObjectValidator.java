@@ -125,7 +125,7 @@ public class ObjectValidator {
 		for (String keyPattern : schema.getPatternProperties().keySet())
 			compiledPatterns.put(keyPattern, Pattern.compile(keyPattern));
 
-		List<String> goodKeys = new ArrayList<>(keys);
+		List<String> goodKeys = new ArrayList<>();
 
 		for (String key : keys) {
 			List<String> newParents = new ArrayList<>(parents == null ? List.of() : parents);

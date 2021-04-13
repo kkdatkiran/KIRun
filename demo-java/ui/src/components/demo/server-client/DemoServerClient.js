@@ -7,6 +7,10 @@ import Editor from "./../Editor/Editor";
 import Login from "./login/Login";
 
 export default function DemoServerClient() {
+  return <div className="demoContainer">Under construction...</div>;
+}
+
+function DemoServerClient_actual() {
   const { auth } = useLoginContextState();
 
   if (!auth) return <Login />;

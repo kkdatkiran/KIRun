@@ -49,9 +49,7 @@ export default function ForgotPassword(props) {
     getData(dispatch);
   }, []);
 
-  const userNameErrorComponent = userNameError ? (
-    <div className="errorMessage">{userNameError}</div>
-  ) : undefined;
+  const userNameErrorComponent = userNameError ? <div className="errorMessage">{userNameError}</div> : undefined;
 
   const captchaErrorComponent = forgotPasswordCaptchaError ? (
     <div className="errorMessage">{forgotPasswordCaptchaError}</div>
@@ -69,9 +67,7 @@ export default function ForgotPassword(props) {
           name="userName"
           spellCheck="false"
           value={userName}
-          onChange={(e) =>
-            dispatch({ type: CHANGE_USERNAME, payload: e.target.value })
-          }
+          onChange={(e) => dispatch({ type: CHANGE_USERNAME, payload: e.target.value })}
         />
         {userNameErrorComponent}
       </div>
@@ -104,14 +100,7 @@ export default function ForgotPassword(props) {
         <button
           className="submit"
           type="submit"
-          onClick={() =>
-            forgotPassword(
-              dispatch,
-              userName,
-              forgotPasswordCaptcha,
-              captchaString
-            )
-          }
+          onClick={() => forgotPassword(dispatch, userName, forgotPasswordCaptcha, captchaString)}
         >
           Forgot Password
         </button>

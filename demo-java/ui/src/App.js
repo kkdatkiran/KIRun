@@ -83,10 +83,7 @@ export default function App() {
               <>
                 <Nav />
                 <Logo />
-                <ActivateUser
-                  emailId={props.match?.params?.emailId}
-                  activationString={props.match?.params?.activationString}
-                />
+                <ActivateUser emailId={props.match?.params?.emailId} activationString={props.match?.params?.activationString} />
               </>
             )}
           />
@@ -96,10 +93,7 @@ export default function App() {
               <>
                 <Nav />
                 <Logo />
-                <Login
-                  emailId={props.match?.params?.emailId}
-                  resetPasswordString={props.match?.params?.resetPasswordString}
-                />
+                <Login emailId={props.match?.params?.emailId} resetPasswordString={props.match?.params?.resetPasswordString} />
               </>
             )}
           />

@@ -20,10 +20,7 @@ export default function Browser() {
   const [newFunctionName, setNewFunctionName] = useState("");
   const [newFunctionPopup, setNewFunctionPopup] = useState(false);
 
-  const {
-    serviceFunctions: { content: list = [] } = {},
-    selected,
-  } = useEditorContextState();
+  const { serviceFunctions: { content: list = [] } = {}, selected } = useEditorContextState();
 
   const dispatch = useEditorContextDispatch();
 
@@ -85,9 +82,7 @@ export default function Browser() {
             className={`listItem ${i === selected ? "selected" : ""}`}
             role="button"
             tabIndex="0"
-            onClick={() =>
-              dispatch({ type: CHANGE_SERVICE_SELECTION, payload: i })
-            }
+            onClick={() => dispatch({ type: CHANGE_SERVICE_SELECTION, payload: i })}
             onKeyDown={() => {}}
           >
             {e.name}

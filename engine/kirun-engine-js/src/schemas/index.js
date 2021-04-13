@@ -1,42 +1,44 @@
+import { SchemaType } from "./constants";
+
 const schemas = {
   INTEGER: {
-    type: "INTEGER",
+    type: SchemaType.INTEGER,
     notDeletable: true,
   },
   LONG: {
-    type: "LONG",
+    type: SchemaType.LONG,
     notDeletable: true,
   },
   FLOAT: {
-    type: "FLOAT",
+    type: SchemaType.FLOAT,
     notDeletable: true,
   },
   DOUBLE: {
-    type: "DOUBLE",
+    type: SchemaType.DOUBLE,
     notDeletable: true,
   },
   OBJECT: {
-    type: "OBJECT",
+    type: SchemaType.OBJECT,
     notDeletable: true,
   },
   STRING: {
-    type: "STRING",
+    type: SchemaType.STRING,
     notDeletable: true,
   },
   BOOLEAN: {
-    type: "BOOLEAN",
+    type: SchemaType.BOOLEAN,
     notDeletable: true,
   },
   NULL: {
-    type: "NULL",
+    type: SchemaType.NULL,
     notDeletable: true,
   },
   ARRAY: {
-    type: "ARRAY",
+    type: SchemaType.ARRAY,
     notDeletable: true,
   },
   NUMERIC: {
-    type: ["INTEGER", "LONG", "DOUBLE", "FLOAT"],
+    type: [SchemaType.INTEGER, SchemaType.LONG, SchemaType.DOUBLE, SchemaType.FLOAT],
     notDeletable: true,
   },
 };

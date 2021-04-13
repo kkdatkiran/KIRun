@@ -5,8 +5,7 @@
 body {
   margin: 0;
   background-color: #f7f7f7;
-  font-family: Roboto, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: Roboto, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   overflow: hidden;
 }
 
@@ -88,8 +87,7 @@ nav a:hover {
   background-color: #fff;
   transition: border-color 1s ease;
   font-size: 18px;
-  font-family: Roboto, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: Roboto, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   color: #555;
   letter-spacing: 1px;
@@ -603,6 +601,11 @@ input:-webkit-autofill:active {
   user-select: none;
 }
 
+.demoContainer button.selected {
+  color: #b87957;
+  background-color: #bcbcbc;
+}
+
 .demoContainer button:hover {
   background-color: #fff;
 }
@@ -614,6 +617,8 @@ input:-webkit-autofill:active {
   border-radius: 3px;
   padding: 4px 6px;
   cursor: pointer;
+  height: 24px;
+  width: 30px;
 }
 
 .popupBack {
@@ -695,11 +700,7 @@ input:-webkit-autofill:active {
   height: 3000px;
   background-color: #fff;
   background-size: 20px 20px;
-  background-image: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.05) 1px,
-      transparent 0px
-    ),
+  background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 0px),
     linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0px);
 }
 
@@ -725,15 +726,31 @@ input:-webkit-autofill:active {
   border-radius: 4px;
 }
 
-.editor .statement rect.box {
-  width: 45px;
-  height: 45px;
-  rx: 10px;
-  ry: 10px;
+.editor .statement rect.box,
+.editor .statement rect.selectBox {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
   stroke-width: 2px;
-  fill: #ffffffc0;
+  fill: #ffffff70;
   cursor: pointer;
   stroke: #a85b37;
+  transform: translate(-23px, -23px);
+}
+
+.editor .statement rect.selectBox {
+  width: 36px;
+  height: 36px;
+  transform: translate(-18px, -18px);
+  pointer-events: none;
+  stroke-dasharray: 28 21 18 0;
+}
+
+.editor .inPort,
+.editor .outPort {
+  fill: #fff;
+  stroke: #a85b37;
+  stroke-width: 2px;
 }
 
 .editor .statement rect.box:hover {
@@ -742,27 +759,290 @@ input:-webkit-autofill:active {
 
 .editor .statement text.nodeTitle {
   text-anchor: middle;
-  transform: translate(22px, -8px);
+  transform: translate(0px, -33px);
   fill: #555;
   font-size: 13px;
+  cursor: pointer;
+  pointer-events: none;
 }
 
 .editor .statement rect.titleBack {
   width: 70px;
   height: 20px;
-  rx: 10px;
-  ry: 10px;
+  border-radius: 10px;
   fill: #aaaaaa80;
-  transform: translate(-12px, -22px);
+  transform: translate(-35px, -48px);
+  cursor: pointer;
 }
 
-.editor .statement.START rect.box {
-  stroke: #e8c092;
+.editor .statement.selected rect {
+  stroke-dasharray: 3 3;
 }
 
+/* Statement Colors */
+
+.editor .statement.ASSERT rect.box,
+.editor .statement.ASSERT rect.selectBox,
+.editor .statement.ASSERT .inPort,
+.editor .statement.ASSERT .outPort {
+  stroke: #f1d8bc;
+}
+.editor .statement.ASSERT rect.titleBack {
+  width: 80px;
+  transform: translate(-40px, -48px);
+}
+.editor .statement.BREAK rect.box,
+.editor .statement.BREAK rect.selectBox,
+.editor .statement.BREAK .inPort,
+.editor .statement.BREAK .outPort {
+  stroke: #dfa868;
+}
+.editor .statement.BREAK rect.titleBack {
+  width: 70px;
+  transform: translate(-35px, -48px);
+}
+.editor .statement.CATCH rect.box,
+.editor .statement.CATCH rect.selectBox,
+.editor .statement.CATCH .inPort,
+.editor .statement.CATCH .outPort {
+  stroke: #efc08b;
+}
+.editor .statement.CATCH rect.titleBack {
+  width: 70px;
+  transform: translate(-35px, -48px);
+}
+.editor .statement.CASE rect.box,
+.editor .statement.CASE rect.selectBox,
+.editor .statement.CASE .inPort,
+.editor .statement.CASE .outPort {
+  stroke: #e1c099;
+}
+.editor .statement.CASE rect.titleBack {
+  width: 60px;
+  transform: translate(-30px, -48px);
+}
+.editor .statement.CONTINUE rect.box,
+.editor .statement.CONTINUE rect.selectBox,
+.editor .statement.CONTINUE .inPort,
+.editor .statement.CONTINUE .outPort {
+  stroke: #ffd9ab;
+}
+.editor .statement.CONTINUE rect.titleBack {
+  width: 100px;
+  transform: translate(-50px, -48px);
+}
+.editor .statement.END rect.box,
+.editor .statement.END rect.selectBox,
+.editor .statement.END .inPort,
+.editor .statement.END .outPort {
+  stroke: #a85b37;
+}
 .editor .statement.END rect.titleBack {
   width: 50px;
-  transform: translate(-4px, -22px);
+  transform: translate(-25px, -48px);
+}
+.editor .statement.ELSE rect.box,
+.editor .statement.ELSE rect.selectBox,
+.editor .statement.ELSE .inPort,
+.editor .statement.ELSE .outPort {
+  stroke: #e8c092;
+}
+.editor .statement.ELSE rect.titleBack {
+  width: 60px;
+  transform: translate(-30px, -48px);
+}
+.editor .statement.ELSEIF rect.box,
+.editor .statement.ELSEIF rect.selectBox,
+.editor .statement.ELSEIF .inPort,
+.editor .statement.ELSEIF .outPort {
+  stroke: #ceaa81;
+}
+.editor .statement.ELSEIF rect.titleBack {
+  width: 80px;
+  transform: translate(-40px, -48px);
+}
+.editor .statement.EXPRESSION rect.box,
+.editor .statement.EXPRESSION rect.selectBox,
+.editor .statement.EXPRESSION .inPort,
+.editor .statement.EXPRESSION .outPort {
+  stroke: #deb688;
+}
+.editor .statement.EXPRESSION rect.titleBack {
+  width: 120px;
+  transform: translate(-60px, -48px);
+}
+.editor .statement.FINALLY rect.box,
+.editor .statement.FINALLY rect.selectBox,
+.editor .statement.FINALLY .inPort,
+.editor .statement.FINALLY .outPort {
+  stroke: #dab284;
+}
+.editor .statement.FINALLY rect.titleBack {
+  width: 90px;
+  transform: translate(-45px, -48px);
+}
+.editor .statement.FUNCTION rect.box,
+.editor .statement.FUNCTION rect.selectBox,
+.editor .statement.FUNCTION .inPort,
+.editor .statement.FUNCTION .outPort {
+  stroke: #c5734d;
+}
+.editor .statement.FUNCTION rect.titleBack {
+  width: 100px;
+  transform: translate(-50px, -48px);
+}
+.editor .statement.IF rect.box,
+.editor .statement.IF rect.selectBox,
+.editor .statement.IF .inPort,
+.editor .statement.IF .outPort {
+  stroke: #82462a;
+}
+.editor .statement.IF rect.titleBack {
+  width: 40px;
+  transform: translate(-20px, -48px);
+}
+.editor .statement.LOOP rect.box,
+.editor .statement.LOOP rect.selectBox,
+.editor .statement.LOOP .inPort,
+.editor .statement.LOOP .outPort {
+  stroke: #c17450;
+}
+.editor .statement.LOOP rect.titleBack {
+  width: 60px;
+  transform: translate(-30px, -48px);
+}
+.editor .statement.START rect.box,
+.editor .statement.START rect.selectBox,
+.editor .statement.START .inPort,
+.editor .statement.START .outPort {
+  stroke: #e8c092;
+}
+.editor .statement.START rect.titleBack {
+  width: 70px;
+  transform: translate(-35px, -48px);
+}
+.editor .statement.SWITCH rect.box,
+.editor .statement.SWITCH rect.selectBox,
+.editor .statement.SWITCH .inPort,
+.editor .statement.SWITCH .outPort {
+  stroke: #fd8953;
+}
+.editor .statement.SWITCH rect.titleBack {
+  width: 80px;
+  transform: translate(-40px, -48px);
+}
+.editor .statement.THEN rect.box,
+.editor .statement.THEN rect.selectBox,
+.editor .statement.THEN .inPort,
+.editor .statement.THEN .outPort {
+  stroke: #d27245;
+}
+.editor .statement.THEN rect.titleBack {
+  width: 60px;
+  transform: translate(-30px, -48px);
+}
+.editor .statement.THROW rect.box,
+.editor .statement.THROW rect.selectBox,
+.editor .statement.THROW .inPort,
+.editor .statement.THROW .outPort {
+  stroke: #bb7f63;
+}
+.editor .statement.THROW rect.titleBack {
+  width: 70px;
+  transform: translate(-35px, -48px);
+}
+.editor .statement.TRY rect.box,
+.editor .statement.TRY rect.selectBox,
+.editor .statement.TRY .inPort,
+.editor .statement.TRY .outPort {
+  stroke: #a85b37;
+}
+.editor .statement.TRY rect.titleBack {
+  width: 50px;
+  transform: translate(-25px, -48px);
+}
+.editor .statement.WHILESTART rect.box,
+.editor .statement.WHILESTART rect.selectBox,
+.editor .statement.WHILESTART .inPort,
+.editor .statement.WHILESTART .outPort {
+  stroke: #5d321e;
+}
+.editor .statement.WHILESTART rect.titleBack {
+  width: 120px;
+  transform: translate(-60px, -48px);
+}
+.editor .statement.WHILEEND rect.box,
+.editor .statement.WHILEEND rect.selectBox,
+.editor .statement.WHILEEND .inPort,
+.editor .statement.WHILEEND .outPort {
+  stroke: #d8b6a6;
+}
+.editor .statement.WHILEEND rect.titleBack {
+  width: 100px;
+  transform: translate(-50px, -48px);
+}
+.editor .statement.UNKNOWN rect.box,
+.editor .statement.UNKNOWN rect.selectBox,
+.editor .statement.UNKNOWN .inPort,
+.editor .statement.UNKNOWN .outPort {
+  stroke: #aaaaaa;
+}
+.editor .statement.UNKNOWN rect.titleBack {
+  width: 90px;
+  transform: translate(-45px, -48px);
+}
+
+/* Statement Colors End*/
+
+.editor .ctxMenuBack {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 4;
+}
+
+.editor .ctxMenu {
+  position: absolute;
+  background: #fffa;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  padding: 2px;
+  box-shadow: 1px 1px 4px 0px #ddd;
+}
+
+.editor .ctxMenu.groups {
+  display: flex;
+  flex-direction: row;
+}
+
+.editor .ctxMenugroup {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.editor .ctxMenuItem {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: #555;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.editor .ctxMenu.groups.statements .ctxMenuItem {
+  text-align: center;
+  border-radius: 14px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.editor .ctxMenuItem:hover,
+.editor .ctxMenuItem.selected {
+  background-color: #ccc;
 }
 
 @media only screen and (max-width: 900px) {
@@ -791,4 +1071,10 @@ input:-webkit-autofill:active {
   .footer {
     font-size: 12px;
   }
+}
+
+/* Icons */
+svg.kicon {
+  width: 100%;
+  height: 100%;
 }

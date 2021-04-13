@@ -71,74 +71,60 @@ function loginReducer(state = defaultState, action) {
     case VALIDATE_FORGOT_PASSWORD_FORM: {
       let returnState = { ...state };
 
-      if (!returnState.userName)
-        returnState.userNameError = "User name cannot be empty.";
+      if (!returnState.userName) returnState.userNameError = "User name cannot be empty.";
       else delete returnState.userNameError;
 
-      if (!returnState.forgotPasswordCaptcha)
-        returnState.forgotPasswordCaptchaError = "Captcha cannot be empty.";
+      if (!returnState.forgotPasswordCaptcha) returnState.forgotPasswordCaptchaError = "Captcha cannot be empty.";
       else delete returnState.forgotPasswordCaptchaError;
 
       return returnState;
     }
     case VALIDATE_LOGIN_FORM: {
       let returnState = { ...state };
-      if (!returnState.userName)
-        returnState.userNameError = "User name cannot be empty.";
+      if (!returnState.userName) returnState.userNameError = "User name cannot be empty.";
       else delete returnState.userNameError;
 
-      if (!returnState.password)
-        returnState.passwordError = "Password cannot be empty.";
+      if (!returnState.password) returnState.passwordError = "Password cannot be empty.";
       else delete returnState.password;
 
       return returnState;
     }
     case VALIDATE_FORGOT_PASSWORD_RESET_FORM: {
       let returnState = { ...state };
-      if (!returnState.userName)
-        returnState.userNameError = "User name cannot be empty.";
+      if (!returnState.userName) returnState.userNameError = "User name cannot be empty.";
       else delete returnState.userNameError;
 
-      if (!returnState.password)
-        returnState.passwordError = "Password cannot be empty.";
+      if (!returnState.password) returnState.passwordError = "Password cannot be empty.";
       else delete returnState.passwordError;
 
       if (returnState.password !== returnState.retypePassword)
-        returnState.retypePasswordError =
-          "Password should match with retyped password.";
+        returnState.retypePasswordError = "Password should match with retyped password.";
       else delete returnState.retypePasswordError;
 
-      if (!returnState.resetCaptcha)
-        returnState.resetCaptchaCaptchaError = "Captcha cannot be empty.";
+      if (!returnState.resetCaptcha) returnState.resetCaptchaCaptchaError = "Captcha cannot be empty.";
       else delete returnState.resetCaptchaCaptchaError;
 
       return returnState;
     }
     case VALIDATE_SIGN_UP_FORM: {
       let returnState = { ...state };
-      if (!returnState.userName)
-        returnState.userNameError = "User name cannot be empty.";
+      if (!returnState.userName) returnState.userNameError = "User name cannot be empty.";
       else delete returnState.userNameError;
 
-      if (!returnState.password)
-        returnState.passwordError = "Password cannot be empty.";
+      if (!returnState.password) returnState.passwordError = "Password cannot be empty.";
       else delete returnState.passwordError;
 
       if (returnState.password !== returnState.retypePassword)
-        returnState.retypePasswordError =
-          "Password should match with retyped password.";
+        returnState.retypePasswordError = "Password should match with retyped password.";
       else delete returnState.retypePasswordError;
 
-      if (!returnState.firstName)
-        returnState.firstNameError = "First name cannot be empty.";
+      if (!returnState.firstName) returnState.firstNameError = "First name cannot be empty.";
       else delete returnState.firstNameError;
 
-      if (!returnState.lastName)
-        returnState.lastNameError = "Last name cannot be empty.";
+      if (!returnState.lastName) returnState.lastNameError = "Last name cannot be empty.";
       else delete returnState.lastNameError;
 
-      if (!returnState.signUpCaptcha)
-        returnState.signUpCaptchaError = "Captcha cannot be empty.";
+      if (!returnState.signUpCaptcha) returnState.signUpCaptchaError = "Captcha cannot be empty.";
       else delete returnState.signUpCaptchaError;
 
       return returnState;
@@ -154,28 +140,20 @@ function LoginContextProvider({ children, auth }) {
 
   return (
     <LoginStateContext.Provider value={state}>
-      <LoginDispatchContext.Provider value={dispatch}>
-        {children}
-      </LoginDispatchContext.Provider>
+      <LoginDispatchContext.Provider value={dispatch}>{children}</LoginDispatchContext.Provider>
     </LoginStateContext.Provider>
   );
 }
 
 function useLoginContextState() {
   const ctx = React.useContext(LoginStateContext);
-  if (!ctx)
-    throw new Error(
-      "Unable create context for login context. Please use in components wrapped in LoginContextProvider."
-    );
+  if (!ctx) throw new Error("Unable create context for login context. Please use in components wrapped in LoginContextProvider.");
   return ctx;
 }
 
 function useLoginContextDispatch() {
   const ctx = React.useContext(LoginDispatchContext);
-  if (!ctx)
-    throw new Error(
-      "Unable create context for login context. Please use in components wrapped in LoginContextProvider."
-    );
+  if (!ctx) throw new Error("Unable create context for login context. Please use in components wrapped in LoginContextProvider.");
   return ctx;
 }
 

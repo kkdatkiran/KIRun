@@ -8,147 +8,14 @@ var _schemas = _interopRequireDefault(require("../schemas"));
 
 var _functions = _interopRequireDefault(require("../functions"));
 
+var _statements = _interopRequireDefault(require("./statements"));
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var STATEMENTS = {
-  ASSERT: {
-    "in": 1,
-    out: 1,
-    dependency: {}
-  },
-  BREAK: {
-    "in": 1,
-    out: 0,
-    dependency: {
-      parent: ["LOOP", " WHILESTART", " WHILEEND"]
-    }
-  },
-  CATCH: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    dependency: {
-      predecessor: ["TRY"]
-    }
-  },
-  CASE: {
-    "in": 1,
-    out: 0,
-    hasChildren: true,
-    dependency: {
-      parent: ["SWITCH"]
-    }
-  },
-  CONTINUE: {
-    "in": 1,
-    out: 0,
-    dependency: {
-      parent: ["LOOP", " WHILESTART", " WHILEEND"]
-    }
-  },
-  END: {
-    "in": 1,
-    out: 0,
-    dependency: {}
-  },
-  ELSE: {
-    "in": 1,
-    out: 0,
-    hasChildren: true,
-    dependency: {
-      parent: ["IF", " ELSEIF"]
-    }
-  },
-  ELSEIF: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    childrenAllowed: ["THEN", " ELSE", " ELSEIF"],
-    dependency: {
-      parent: ["IF"],
-      children: ["ELSE", "ELSEIF"]
-    }
-  },
-  EXPRESSION: {
-    "in": 1,
-    out: 1,
-    dependency: {}
-  },
-  FINALLY: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    dependency: {
-      predecessor: ["TRY", " CATCH"]
-    }
-  },
-  FUNCTION: {
-    "in": 0,
-    out: 1,
-    hasChildren: true,
-    dependency: {}
-  },
-  IF: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    childrenAllowed: ["THEN", " ELSE", " ELSEIF"],
-    dependency: {
-      children: ["ELSE", "ELSEIF"]
-    }
-  },
-  LOOP: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    dependency: {}
-  },
-  START: {
-    "in": 0,
-    out: 1,
-    dependency: {}
-  },
-  SWITCH: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    childrenAllowed: ["CASE"],
-    dependency: {}
-  },
-  THEN: {
-    "in": 1,
-    out: 0,
-    hasChildren: true,
-    dependency: {}
-  },
-  THROW: {
-    "in": 1,
-    out: 1,
-    dependency: {}
-  },
-  TRY: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    dependency: {}
-  },
-  WHILESTART: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    dependency: {}
-  },
-  WHILEEND: {
-    "in": 1,
-    out: 1,
-    hasChildren: true,
-    dependency: {}
-  }
-};
 var GENERAL = "general";
 
 function addMessage(msgs, key, message) {
@@ -219,8 +86,9 @@ function debug() {}
 function execute() {}
 
 module.exports = {
-  statements: STATEMENTS,
+  statements: _statements["default"],
   compile: compile,
   debug: debug,
   execute: execute
 };
+//# sourceMappingURL=index.js.map

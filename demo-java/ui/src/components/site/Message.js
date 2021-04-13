@@ -19,21 +19,13 @@ export default function Message() {
   return (
     <>
       {messages.map((e, index) => (
-        <div
-          key={e.when}
-          className={`messageContainer ${e.type}`}
-          style={{ bottom: `${index * 80 + 15}px` }}
-        >
+        <div key={e.when} className={`messageContainer ${e.type}`} style={{ bottom: `${index * 80 + 15}px` }}>
           <div className="message" title={e.message}>
             {e.message ? `${e.message.substring(0, 180)}...` : ""}
             {e.errorCode ? ` (${e.errorCode})` : ""}
           </div>
           <div className="closeButton">
-            <button
-              onClick={() =>
-                dispatch({ type: DELETE_MESSAGE, payload: e.when })
-              }
-            >
+            <button onClick={() => dispatch({ type: DELETE_MESSAGE, payload: e.when })}>
               <img src="/images/close.png" alt="Remove Message" />
             </button>
           </div>

@@ -26,6 +26,8 @@ public class TypeValidator {
 			ObjectValidator.validate(parents, schema, repository, element);
 		} else if (type == SchemaType.ARRAY) {
 			ArrayValidator.validate(parents, schema, repository, element);
+		} else if (type == SchemaType.NULL) {
+			NullValidator.validate(parents, schema, element);
 		} else {
 
 			throw new SchemaValidationException(path(parents, schema.getTitle()), type + " is not a valid type.");

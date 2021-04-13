@@ -30,7 +30,7 @@ public class AnyOfAllOfOneOfValidator {
 	private static void anyOf(List<String> parents, Schema schema, Repository<Schema> repository, JsonElement element,
 			List<SchemaValidationException> list) {
 		boolean flag = false;
-		for (Schema s : schema.getOneOf()) {
+		for (Schema s : schema.getAnyOf()) {
 			try {
 				validate(parents, s, repository, element);
 				flag = true;

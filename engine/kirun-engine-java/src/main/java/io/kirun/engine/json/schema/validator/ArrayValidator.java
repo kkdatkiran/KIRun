@@ -16,7 +16,8 @@ import io.kirun.engine.repository.Repository;
 
 public class ArrayValidator {
 
-	public static void validate(List<String> parents, Schema schema, Repository<Schema> repository, JsonElement element) {
+	public static void validate(List<String> parents, Schema schema, Repository<Schema> repository,
+			JsonElement element) {
 
 		if (element == null || element.isJsonNull())
 			throw new SchemaValidationException(path(parents, schema.getTitle()), "Expected an array but found null");
@@ -38,25 +39,28 @@ public class ArrayValidator {
 
 	private static void checkContains(List<String> parents, Schema schema, Repository<Schema> repository,
 			JsonArray array) {
-		if (schema.getContains() != null) {
-			boolean flag = false;
-			for (int i = 0; i < array.size(); i++) {
-				List<String> newParents = new ArrayList<>(parents == null ? List.of() : parents);
-				newParents.add("" + i);
-				try {
-					SchemaValidator.validate(newParents, schema.getContains(), repository, array.get(i));
-					flag = true;
-					break;
-				} catch (Exception ex) {
-					flag = false;
-				}
-			}
 
-			if (!flag) {
-				throw new SchemaValidationException(path(parents, schema.getTitle()),
-						"None of the items are of type contains schema");
+		if (schema.getContains() == null)
+			return;
+
+		boolean flag = false;
+		for (int i = 0; i < array.size(); i++) {
+			List<String> newParents = new ArrayList<>(parents == null ? List.of() : parents);
+			newParents.add("" + i);
+			try {
+				SchemaValidator.validate(newParents, schema.getContains(), repository, array.get(i));
+				flag = true;
+				break;
+			} catch (Exception ex) {
+				flag = false;
 			}
 		}
+
+		if (!flag) {
+			throw new SchemaValidationException(path(parents, schema.getTitle()),
+					"None of the items are of type contains schema");
+		}
+
 	}
 
 	private static void checkUniqueItems(List<String> parents, Schema schema, JsonArray array) {
@@ -74,19 +78,22 @@ public class ArrayValidator {
 	}
 
 	private static void checkMinMaxItems(List<String> parents, Schema schema, JsonArray array) {
-		if (schema.getMinItems() != null && schema.getMinItems().intValue() < array.size()) {
+		if (schema.getMinItems() != null && schema.getMinItems().intValue() > array.size()) {
 			throw new SchemaValidationException(path(parents, schema.getTitle()),
-					"Array should have minimum of " + schema.getMinProperties() + " elements");
+					"Array should have minimum of " + schema.getMinItems() + " elements");
 		}
 
-		if (schema.getMaxItems() != null && schema.getMaxItems().intValue() > array.size()) {
+		if (schema.getMaxItems() != null && schema.getMaxItems().intValue() < array.size()) {
 			throw new SchemaValidationException(path(parents, schema.getTitle()),
 					"Array can have maximum of " + schema.getMaxItems() + " elements");
 		}
 	}
 
-	private static void checkItems(List<String> parents, Schema schema, Repository<Schema> repository, JsonArray array) {
+	private static void checkItems(List<String> parents, Schema schema, Repository<Schema> repository,
+			JsonArray array) {
 		ArraySchemaType type = schema.getItems();
+		if (type == null) return;
+		
 		if (type.getSingleSchema() != null) {
 
 			for (int i = 0; i < array.size(); i++) {

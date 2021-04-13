@@ -28,20 +28,11 @@ async function loginNow(dispatch, loginBody) {
 }
 
 export default function LoginForm(props) {
-  const {
-    userName,
-    password,
-    userNameError,
-    passwordError,
-  } = useLoginContextState();
+  const { userName, password, userNameError, passwordError } = useLoginContextState();
   const dispatch = useLoginContextDispatch();
 
-  const userNameErrorComponent = userNameError ? (
-    <div className="errorMessage">{userNameError}</div>
-  ) : undefined;
-  const passwordErrorComponent = passwordError ? (
-    <div className="errorMessage">{passwordError}</div>
-  ) : undefined;
+  const userNameErrorComponent = userNameError ? <div className="errorMessage">{userNameError}</div> : undefined;
+  const passwordErrorComponent = passwordError ? <div className="errorMessage">{passwordError}</div> : undefined;
 
   return (
     <div className="form">
@@ -55,9 +46,7 @@ export default function LoginForm(props) {
           name="userName"
           spellCheck="false"
           value={userName}
-          onChange={(e) =>
-            dispatch({ type: CHANGE_USERNAME, payload: e.target.value })
-          }
+          onChange={(e) => dispatch({ type: CHANGE_USERNAME, payload: e.target.value })}
         />
         {userNameErrorComponent}
       </div>
@@ -71,9 +60,7 @@ export default function LoginForm(props) {
           name="password"
           spellCheck="false"
           value={password}
-          onChange={(e) =>
-            dispatch({ type: CHANGE_PASSWORD, payload: e.target.value })
-          }
+          onChange={(e) => dispatch({ type: CHANGE_PASSWORD, payload: e.target.value })}
         />
         {passwordErrorComponent}
       </div>
@@ -92,12 +79,8 @@ export default function LoginForm(props) {
         </button>
       </div>
       <div className="links">
-        <button onClick={() => props.onModeChange(FORGOT_PASSWORD)}>
-          forgot password
-        </button>
-        <button onClick={() => props.onModeChange(SIGN_UP_FORM)}>
-          sign up a new user
-        </button>
+        <button onClick={() => props.onModeChange(FORGOT_PASSWORD)}>forgot password</button>
+        <button onClick={() => props.onModeChange(SIGN_UP_FORM)}>sign up a new user</button>
       </div>
     </div>
   );

@@ -18,18 +18,8 @@ export function makeFunction(signature, func) {
 
       signature.parameters.forEach((e) => {
         const argList = args[e.name];
-        if (!e.isVariableArgument && (argList === null || argList.length !== 1))
-          throw `Expects one argument with name ${e.name}`;
-        if (argList)
-          argList.forEach((a) =>
-            validate(
-              null,
-              e.schema,
-              schemaRepository,
-              functionRepository,
-              a.value
-            )
-          );
+        if (!e.isVariableArgument && (argList === null || argList.length !== 1)) throw `Expects one argument with name ${e.name}`;
+        if (argList) argList.forEach((a) => validate(null, e.schema, schemaRepository, functionRepository, a.value));
       });
       return func(args, schemaRepository, functionRepository);
     },

@@ -59,9 +59,7 @@ export default function ForgotPasswordReset({ userName, resetPasswordString }) {
 
   const history = useHistory();
 
-  const passwordErrorComponent = passwordError ? (
-    <div className="errorMessage">{passwordError}</div>
-  ) : undefined;
+  const passwordErrorComponent = passwordError ? <div className="errorMessage">{passwordError}</div> : undefined;
 
   const retypePasswordErrorComponent = retypePasswordError ? (
     <div className="errorMessage">{retypePasswordError}</div>
@@ -77,13 +75,7 @@ export default function ForgotPasswordReset({ userName, resetPasswordString }) {
         <label htmlFor="userName">
           User name / Email <span className="mandatory">*</span>
         </label>
-        <input
-          type="email"
-          id="userName"
-          name="userName"
-          spellCheck="false"
-          value={userName}
-        />
+        <input type="email" id="userName" name="userName" spellCheck="false" value={userName} />
       </div>
       <div className="field">
         <label htmlFor="password">
@@ -95,9 +87,7 @@ export default function ForgotPasswordReset({ userName, resetPasswordString }) {
           name="password"
           spellCheck="false"
           value={password}
-          onChange={(e) =>
-            dispatch({ type: CHANGE_PASSWORD, payload: e.target.value })
-          }
+          onChange={(e) => dispatch({ type: CHANGE_PASSWORD, payload: e.target.value })}
         />
         {passwordErrorComponent}
       </div>

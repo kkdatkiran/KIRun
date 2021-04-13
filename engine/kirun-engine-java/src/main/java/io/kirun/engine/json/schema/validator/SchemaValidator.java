@@ -2,7 +2,6 @@ package io.kirun.engine.json.schema.validator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.google.gson.JsonElement;
@@ -19,24 +18,12 @@ public class SchemaValidator {
 		if (schema == null)
 			return element;
 
-		if (element == null || element.isJsonNull())
+		if ((element == null || element.isJsonNull()) &&  schema.getDefaultValue() != null)
 			return schema.getDefaultValue();
 
 		if (schema.getConstant() != null)
 			return schema.getConstant();
-
-		if (schema.getRef() != null) {
-
-			Map<String, Schema> definitions = schema.getDefinitions();
-			Schema s = null;
-			if (definitions != null && definitions.containsKey(schema.getRef()))
-				s = definitions.get(schema.getRef());
-			if (s == null)
-				s = repository.find(schema.getRef());
-
-			return validate(parents, s, repository, element);
-		}
-
+		
 		if (schema.getEnums() != null && !schema.getEnums().isEmpty()) {
 			return enumCheck(parents, schema, element);
 		}
@@ -93,13 +80,11 @@ public class SchemaValidator {
 			try {
 				TypeValidator.validate(parents, type, schema, repository, element);
 				valid = true;
+				break;
 			} catch (SchemaValidationException sve) {
 				valid = false;
 				list.add(sve);
 			}
-
-			if (valid)
-				break;
 		}
 
 		if (!valid) {
@@ -109,11 +94,13 @@ public class SchemaValidator {
 	}
 
 	public static String path(List<String> parents, String title) {
+		
+		if (title == null) return  "";
 
 		if (parents == null || parents.isEmpty())
 			return title;
 
-		return parents.stream().collect(Collectors.joining("/")) + "/" + title;
+		return parents.stream().collect(Collectors.joining("/")) + "/" + title + " ";
 	}
 
 	private SchemaValidator() {
